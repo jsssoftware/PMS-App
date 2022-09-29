@@ -1,0 +1,57 @@
+<!-- ============================================================== -->
+<!-- sidebar -->
+<!-- ============================================================== -->
+<div class="user-profile" style="background: url(../../../../assets/images/bg-image.jpg) no-repeat;">
+  <!-- User profile image -->
+  <div class="profile-img"> <img src="../../../../assets/images/profile-image.jpg" alt="user"> </div>
+  <!-- User profile text-->
+  <!-- ============================================================== -->
+  <!-- Profile - style you can find in header.scss -->
+  <!-- ============================================================== -->
+  <div class="profile-text"><a [matMenuTriggerFor]="sdprofile" class=""> Hello {{loggedInUserName}} <i
+        class="ti-angle-down font-12 m-l-5"></i></a></div>
+  <mat-menu #sdprofile="matMenu" class="mymegamenu">
+    <button mat-menu-item>
+      <mat-icon>account_box</mat-icon> Profile
+    </button>
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>exit_to_app</mat-icon> Sign Out
+    </button>
+  </mat-menu>
+</div>
+<!-- <mat-nav-list appAccordion>
+    <mat-list-item appAccordionLink *ngFor="let menuitem of menuItems.getMenuitem()" routerLinkActive="selected">
+      <a class="" appAccordionToggle [routerLink]="['./', menuitem.state]" *ngIf="menuitem.type === 'link'">
+        <mat-icon>{{ menuitem.icon }}</mat-icon>
+        <span>{{ menuitem.name }}</span>
+        <span fxFlex style="flex: 1 1 0%;"></span>
+      </a>
+      <ul *ngIf="menuitem.name == 'Motor'" >
+        <ng-container>
+          <a class="" appAccordionToggle [routerLink]="['./', menuitem.subState]" *ngIf="menuitem.type === 'link'">
+            <mat-icon>{{ menuitem.icon }}</mat-icon>
+            <span>{{ menuitem.subName }}</span>
+            <span fxFlex style="flex: 1 1 0%;"></span>
+          </a>
+        </ng-container>
+      </ul>
+    </mat-list-item>
+  </mat-nav-list> -->
+<mat-accordion>
+  <div *ngFor="let navMenu of navigationMenu">
+    <mat-expansion-panel [hideToggle]="navMenu.Child.length == 0">
+      <mat-expansion-panel-header (click)="NavMenu(navMenu.Title)">
+        <mat-icon>{{navMenu.Icon}}</mat-icon>
+        <mat-panel-title>{{navMenu.Title}}</mat-panel-title>
+      </mat-expansion-panel-header>
+      <div *ngFor="let subNavMenu of navMenu.Child">
+        <mat-expansion-panel hideToggle>
+          <mat-expansion-panel-header (click)="NavMenu(subNavMenu.SubTitle)">
+            <mat-icon>{{subNavMenu.SubIcon}}</mat-icon>
+            <mat-panel-title>{{subNavMenu.SubTitle}}</mat-panel-title>
+          </mat-expansion-panel-header>
+        </mat-expansion-panel>
+      </div>
+    </mat-expansion-panel>
+  </div>
+</mat-accordion>
