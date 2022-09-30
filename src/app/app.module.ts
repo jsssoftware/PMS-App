@@ -12,7 +12,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MotorModule } from './components/motor/motor.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
-import { AuthGuard } from './auth-guard/auth.guard';
+import { AuthGuard } from './shared/auth-guard/auth.guard';
 import { VoucherComponent } from './components/voucher/voucher.component';
 import { SearchVoucherComponent } from './components/voucher/search-voucher/search-voucher.component';
 import { AddVoucherComponent } from './components/voucher/add-voucher/add-voucher.component';
