@@ -1,5 +1,5 @@
 import { Component, OnInit , Input,  ViewChild} from '@angular/core';
-import { IMenuItemDto } from 'src/app/dtos/common/menuitem-dto';
+import { IMenuItemDto } from 'src/app/Entites/dtos/common/menuitem-dto';
 
 @Component({
   selector: 'app-menu-item',

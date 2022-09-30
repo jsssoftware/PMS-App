@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, Inject, Input, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IPolicyVoucherDto } from 'src/app/dtos/common/policy-voucher-dto';
+import { IPolicyVoucherDto } from 'src/app/Entites/dtos/common/policy-voucher-dto';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 
 @Component({

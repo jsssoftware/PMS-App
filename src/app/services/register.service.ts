@@ -17,7 +17,7 @@ import { MotorService } from "./motor-service/motor.service";
 import { OAuthTokenInterceptor } from "./token-interceptor/oauth-token-interceptor";
 import { IVoucherService } from "./voucher/abstracts/voucher.iservice";
 import { VoucherService } from "./voucher/voucher.service";
-import { CUSTOM_DATE_FORMAT } from "../utilities/helpers/helper";
+import { CUSTOM_DATE_FORMAT } from "../shared/utilities/helpers/helper";
 
 export const Services = [
   { provide: IApiManagerService, useClass: ApiManagerService },

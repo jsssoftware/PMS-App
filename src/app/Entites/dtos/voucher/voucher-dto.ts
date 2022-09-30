@@ -1,4 +1,4 @@
-import { IDateDto } from "src/app/dtos/common/date-dto"
+import { IDateDto } from "src/app/Entites/dtos/common/date-dto"
 
 export interface IVoucherDto {
     ControlNumber: string;

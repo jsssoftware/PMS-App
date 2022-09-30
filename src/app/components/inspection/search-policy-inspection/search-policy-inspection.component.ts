@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { IInspectionSearchPolicyDto } from 'src/app/dtos/inspection/inspection-search-policy-dto';
-import { IInspectionSearchPolicyModel } from 'src/app/models/inspection/inspection-search-policy-model';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { IInspectionSearchPolicyDto } from 'src/app/Entites/dtos/inspection/inspection-search-policy-dto';
+import { IInspectionSearchPolicyModel } from 'src/app/Entites/models/inspection/inspection-search-policy-model';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
 import { IInspectionService } from 'src/app/services/inspection/abstracts/inspection.iservice';
-import { Vertical } from 'src/app/utilities/enums/enum';
+import { Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-search-policy-inspection',

@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { SearchPolicyType, SearchPolicyTypeName } from "../utilities/enums/enum";
+import { SearchPolicyType, SearchPolicyTypeName } from "../enums/enum";
 
 @Injectable()
 export class CommonFunction {

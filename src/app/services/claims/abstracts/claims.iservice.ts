@@ -1,14 +1,14 @@
 import { Observable } from "rxjs";
-import { IClaimsDocumentDto } from "src/app/dtos/claims/claims-document-dto";
-import { IClaimsDto } from "src/app/dtos/claims/claims-dto";
-import { IClaimsSearchPolicyDto } from "src/app/dtos/claims/claims-search-policy-dto";
-import { IFollowUpDto } from "src/app/dtos/claims/follow-up-dto";
-import { ISearchClaimsDto } from "src/app/dtos/claims/search-claims-dto";
-import { ISearchClaimsPolicyDto } from "src/app/dtos/claims/search-claims-policy-dto";
-import { ICommonDto } from "src/app/dtos/common/common-dto";
-import { IAddUpdateClaimsModel } from "src/app/models/claims/add-update-claims-model";
-import { IClaimsSearchPolicyModel } from "src/app/models/claims/claims-search-policy-model";
-import { ISearchClaimsModel } from "src/app/models/claims/search-claims-model";
+import { IClaimsDocumentDto } from "src/app/Entites/dtos/claims/claims-document-dto";
+import { IClaimsDto } from "src/app/Entites/dtos/claims/claims-dto";
+import { IClaimsSearchPolicyDto } from "src/app/Entites/dtos/claims/claims-search-policy-dto";
+import { IFollowUpDto } from "src/app/Entites/dtos/claims/follow-up-dto";
+import { ISearchClaimsDto } from "src/app/Entites/dtos/claims/search-claims-dto";
+import { ISearchClaimsPolicyDto } from "src/app/Entites/dtos/claims/search-claims-policy-dto";
+import { ICommonDto } from "src/app/Entites/dtos/common/common-dto";
+import { IAddUpdateClaimsModel } from "src/app/Entites/models/claims/add-update-claims-model";
+import { IClaimsSearchPolicyModel } from "src/app/Entites/models/claims/claims-search-policy-model";
+import { ISearchClaimsModel } from "src/app/Entites/models/claims/search-claims-model";
 
 export abstract class IClaimsService {
     abstract getClaimsById(claimsId: number): Observable<IClaimsDto>;

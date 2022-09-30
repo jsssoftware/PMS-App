@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject, AfterViewInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IPolicyInspectionDto } from 'src/app/dtos/common/policy-inspection-dto';
+import { IPolicyInspectionDto } from 'src/app/Entites/dtos/common/policy-inspection-dto';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 
 @Component({

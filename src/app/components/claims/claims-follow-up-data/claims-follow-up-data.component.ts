@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { IFollowUpDto } from 'src/app/dtos/claims/follow-up-dto';
+import { IFollowUpDto } from 'src/app/Entites/dtos/claims/follow-up-dto';
 import { IClaimsService } from 'src/app/services/claims/abstracts/claims.iservice';
 
 @Component({

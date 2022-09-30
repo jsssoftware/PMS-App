@@ -1,21 +1,21 @@
-import { ISearchPolicyDto } from './../../../dtos/common/search-policy-dto';
+import { ISearchPolicyDto } from '../../../Entites/dtos/common/search-policy-dto';
 import { Observable } from "rxjs";
-import { IDateDto } from "src/app/dtos/common/date-dto";
-import { IDropDownDto } from "src/app/dtos/common/drop-down-dto";
-import { IAddOnPlanOptionDto } from "src/app/dtos/motor/add-on-plan-option-dto";
-import { IPolicyTermDto } from "src/app/dtos/motor/policy-term-dto";
-import { IRtoZoneDto } from "src/app/dtos/motor/rto-zone-dto";
-import { IVarientDto } from "src/app/dtos/motor/varient-dto";
-import { IVehicleDto } from "src/app/dtos/motor/vehicle-dto";
-import { IYearDto } from "src/app/dtos/motor/year-dto";
-import { Vertical } from "src/app/utilities/enums/enum";
-import { ISearchPolicyModel } from 'src/app/models/common/search-policy-model';
-import { IDataTableDto } from 'src/app/dtos/common/data-table-dto';
-import { IPreviousClaimDto } from 'src/app/dtos/common/previous-claims-dto';
-import { IPolicyVoucherDto } from 'src/app/dtos/common/policy-voucher-dto';
-import { IPolicyInspectionDto } from 'src/app/dtos/common/policy-inspection-dto';
-import { IPolicyDocumentDto } from 'src/app/dtos/common/policy-document-dto';
-import { IMenuItemDto } from 'src/app/dtos/common/menuitem-dto';
+import { IDateDto } from "src/app/Entites/dtos/common/date-dto";
+import { IDropDownDto } from "src/app/Entites/dtos/common/drop-down-dto";
+import { IAddOnPlanOptionDto } from "src/app/Entites/dtos/motor/add-on-plan-option-dto";
+import { IPolicyTermDto } from "src/app/Entites/dtos/motor/policy-term-dto";
+import { IRtoZoneDto } from "src/app/Entites/dtos/motor/rto-zone-dto";
+import { IVarientDto } from "src/app/Entites/dtos/motor/varient-dto";
+import { IVehicleDto } from "src/app/Entites/dtos/motor/vehicle-dto";
+import { IYearDto } from "src/app/Entites/dtos/motor/year-dto";
+import { Vertical } from "src/app/shared/utilities/enums/enum";
+import { ISearchPolicyModel } from 'src/app/Entites/models/common/search-policy-model';
+import { IDataTableDto } from 'src/app/Entites/dtos/common/data-table-dto';
+import { IPreviousClaimDto } from 'src/app/Entites/dtos/common/previous-claims-dto';
+import { IPolicyVoucherDto } from 'src/app/Entites/dtos/common/policy-voucher-dto';
+import { IPolicyInspectionDto } from 'src/app/Entites/dtos/common/policy-inspection-dto';
+import { IPolicyDocumentDto } from 'src/app/Entites/dtos/common/policy-document-dto';
+import { IMenuItemDto } from 'src/app/Entites/dtos/common/menuitem-dto';
 
 export abstract class ICommonService {
     abstract getBanks(): Observable<any>;

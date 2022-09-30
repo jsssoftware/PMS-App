@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ICommonDto } from "src/app/dtos/common/common-dto";
-import { IDropDownDto } from "src/app/dtos/common/drop-down-dto";
-import { ICustomerShortDetailDto } from "src/app/dtos/customer/customer-short-detail-dto";
-import { IAddUpdateCustomerModel } from "src/app/models/customer/add-update-customer-model";
-import { Customer } from "src/app/utilities/api-urls/customer";
+import { ICommonDto } from "src/app/Entites/dtos/common/common-dto";
+import { IDropDownDto } from "src/app/Entites/dtos/common/drop-down-dto";
+import { ICustomerShortDetailDto } from "src/app/Entites/dtos/customer/customer-short-detail-dto";
+import { IAddUpdateCustomerModel } from "src/app/Entites/models/customer/add-update-customer-model";
+import { Customer } from "src/app/shared/utilities/api-urls/customer";
 import { IApiManagerService } from "../api-manager/abstracts/api-manager-iservice";
 import { ICustomerService } from "./abstracts/customer.iservice";
 

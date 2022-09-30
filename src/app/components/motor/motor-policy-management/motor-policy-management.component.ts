@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { PolicyManagement, SearchPolicyType, Vertical } from 'src/app/utilities/enums/enum';
+import { PolicyManagement, SearchPolicyType, Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-motor-policy-management',

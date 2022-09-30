@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { ISearchVoucherDto } from 'src/app/dtos/voucher/search-voucher-dto';
-import { ISearchVoucherModel } from 'src/app/models/voucher/search-voucher-model';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { ISearchVoucherDto } from 'src/app/Entites/dtos/voucher/search-voucher-dto';
+import { ISearchVoucherModel } from 'src/app/Entites/models/voucher/search-voucher-model';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
 import { IVoucherService } from 'src/app/services/voucher/abstracts/voucher.iservice';
-import { Vertical } from 'src/app/utilities/enums/enum';
+import { Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-search-voucher',

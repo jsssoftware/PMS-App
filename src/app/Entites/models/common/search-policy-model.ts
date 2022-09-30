@@ -1,4 +1,4 @@
-import { PolicyManagement } from "src/app/utilities/enums/enum";
+import { PolicyManagement } from "src/app/shared/utilities/enums/enum";
 
 export interface ISearchPolicyModel {
     ControlNumber: IControlNumber;

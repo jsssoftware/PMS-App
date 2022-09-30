@@ -5,8 +5,8 @@ import { AppComponent } from './components/app/app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from './shared/material-module';
-import { MenuItems } from './shared/sidebar-menu';
+import { MaterialModule } from './shared/material/material-module';
+import { MenuItems } from './shared/utilities/helpers/sidebar-menu';
 import { Services } from './services/register.service';
 import { LoginComponent } from './components/login/login.component';
 import { MotorModule } from './components/motor/motor.module';
@@ -28,7 +28,7 @@ import { InspectionComponent } from './components/inspection/inspection.componen
 import { SearchInspectionComponent } from './components/inspection/search-inspection/search-inspection.component';
 import { SearchPolicyInspectionComponent } from './components/inspection/search-policy-inspection/search-policy-inspection.component';
 import { AddInspectionComponent } from './components/inspection/add-inspection/add-inspection.component';
-import { CommonFunction } from 'src/app/shared/common-function'; 
+import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function'; 
 
 @NgModule({
   declarations: [

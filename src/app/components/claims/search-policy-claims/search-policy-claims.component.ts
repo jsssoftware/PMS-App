@@ -3,14 +3,14 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { ISearchPolicyDto } from 'src/app/dtos/common/search-policy-dto';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { ISearchPolicyDto } from 'src/app/Entites/dtos/common/search-policy-dto';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
-import { FormMode, Vertical } from 'src/app/utilities/enums/enum';
-import { IClaimsSearchPolicyModel } from 'src/app/models/claims/claims-search-policy-model';
+import { FormMode, Vertical } from 'src/app/shared/utilities/enums/enum';
+import { IClaimsSearchPolicyModel } from 'src/app/Entites/models/claims/claims-search-policy-model';
 import { IClaimsService } from 'src/app/services/claims/abstracts/claims.iservice';
-import { IClaimsSearchPolicyDto } from 'src/app/dtos/claims/claims-search-policy-dto';
+import { IClaimsSearchPolicyDto } from 'src/app/Entites/dtos/claims/claims-search-policy-dto';
 
 @Component({
   selector: 'app-search-policy-claims',

@@ -4,12 +4,12 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ICommonDto } from 'src/app/dtos/common/common-dto';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { IAddUpdateCustomerModel } from 'src/app/models/customer/add-update-customer-model';
+import { ICommonDto } from 'src/app/Entites/dtos/common/common-dto';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { IAddUpdateCustomerModel } from 'src/app/Entites/models/customer/add-update-customer-model';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
-import { Vertical } from 'src/app/utilities/enums/enum';
+import { Vertical } from 'src/app/shared/utilities/enums/enum';
 import Swal from 'sweetalert2';
 
 @Component({

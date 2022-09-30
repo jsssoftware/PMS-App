@@ -1,13 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { IVoucherSearchPolicyDto } from 'src/app/dtos/voucher/voucher-search-policy-dto';
-import { IVoucherSearchPolicyModel } from 'src/app/models/voucher/voucher-search-policy-model';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { IVoucherSearchPolicyDto } from 'src/app/Entites/dtos/voucher/voucher-search-policy-dto';
+import { IVoucherSearchPolicyModel } from 'src/app/Entites/models/voucher/voucher-search-policy-model';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
 import { IVoucherService } from 'src/app/services/voucher/abstracts/voucher.iservice';
-import { Vertical } from 'src/app/utilities/enums/enum';
+import { Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-search-policy-voucher',

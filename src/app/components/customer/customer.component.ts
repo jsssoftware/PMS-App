@@ -5,8 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
 import { debounceTime } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { CommonFunction } from 'src/app/shared/common-function';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function';
 
 @Component({
   selector: 'app-customer',

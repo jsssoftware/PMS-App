@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { getMatIconNameNotFoundError } from '@angular/material/icon';
-import { IMenuItemDto } from 'src/app/dtos/common/menuitem-dto';
+import { IMenuItemDto } from 'src/app/Entites/dtos/common/menuitem-dto';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 
 @Component({

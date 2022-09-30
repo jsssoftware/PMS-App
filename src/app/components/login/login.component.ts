@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ILoginDto } from 'src/app/dtos/login/login-dto';
-import { ILoginModel } from 'src/app/models/account/login-model';
+import { ILoginDto } from 'src/app/Entites/dtos/login/login-dto';
+import { ILoginModel } from 'src/app/Entites/models/account/login-model';
 import { IAccountService } from 'src/app/services/account-service/abstracts/account.iservice';
 import Swal from 'sweetalert2';
 import { IApiManagerService } from '../../services/api-manager/abstracts/api-manager-iservice';

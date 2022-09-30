@@ -1,14 +1,14 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ISearchClaimsDto } from 'src/app/dtos/claims/search-claims-dto';
+import { ISearchClaimsDto } from 'src/app/Entites/dtos/claims/search-claims-dto';
 
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { ISearchClaimsModel } from 'src/app/models/claims/search-claims-model';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { ISearchClaimsModel } from 'src/app/Entites/models/claims/search-claims-model';
 import { IClaimsService } from 'src/app/services/claims/abstracts/claims.iservice';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { ICustomerService } from 'src/app/services/customer-service/abstracts/customer.iservice';
-import { FormMode, Vertical } from 'src/app/utilities/enums/enum';
+import { FormMode, Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-search-claims',

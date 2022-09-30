@@ -1,8 +1,8 @@
 import { HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { ILoginModel } from "src/app/models/account/login-model";
-import { Account } from "src/app/utilities/api-urls/account";
+import { ILoginModel } from "src/app/Entites/models/account/login-model";
+import { Account } from "src/app/shared/utilities/api-urls/account";
 import { IApiManagerService } from "../api-manager/abstracts/api-manager-iservice";
 import { IAccountService } from "./abstracts/account.iservice";
 import { JwtHelperService } from "@auth0/angular-jwt";

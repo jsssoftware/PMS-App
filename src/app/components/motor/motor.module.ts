@@ -9,7 +9,7 @@ import { CustomerComponent } from '../customer/customer.component';
 import { AddCustomerComponent } from '../customer/add-customer/add-customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { MaterialModule } from 'src/app/shared/material-module';
+import { MaterialModule } from 'src/app/shared/material/material-module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { MotorPolicyManagementComponent } from './motor-policy-management/motor-policy-management.component';
 import { SearchPolicyComponent } from '../policy/search-policy/search-policy.component';

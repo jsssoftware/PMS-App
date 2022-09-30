@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { ISearchInspectionDto } from 'src/app/dtos/inspection/search-inspection-dto';
-import { ISearchInspectionModel } from 'src/app/models/inspection/search-inspection-model';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { ISearchInspectionDto } from 'src/app/Entites/dtos/inspection/search-inspection-dto';
+import { ISearchInspectionModel } from 'src/app/Entites/models/inspection/search-inspection-model';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
 import { IInspectionService } from 'src/app/services/inspection/abstracts/inspection.iservice';
-import { Vertical } from 'src/app/utilities/enums/enum';
+import { Vertical } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-search-inspection',

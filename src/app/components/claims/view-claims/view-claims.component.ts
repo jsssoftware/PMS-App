@@ -4,18 +4,18 @@ import { ErrorStateMatcher } from '@angular/material/core';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute } from '@angular/router';
-import { IClaimsDocumentDto } from 'src/app/dtos/claims/claims-document-dto';
-import { IClaimsDto } from 'src/app/dtos/claims/claims-dto';
-import { ISearchClaimsPolicyDto } from 'src/app/dtos/claims/search-claims-policy-dto';
-import { ICommonDto } from 'src/app/dtos/common/common-dto';
-import { IDateDto } from 'src/app/dtos/common/date-dto';
-import { IDropDownDto } from 'src/app/dtos/common/drop-down-dto';
-import { IPreviousClaimDto } from 'src/app/dtos/common/previous-claims-dto';
-import { IAddUpdateClaimsModel } from 'src/app/models/claims/add-update-claims-model';
-import { IClaimsDocumentModel } from 'src/app/models/claims/claims-document-model';
+import { IClaimsDocumentDto } from 'src/app/Entites/dtos/claims/claims-document-dto';
+import { IClaimsDto } from 'src/app/Entites/dtos/claims/claims-dto';
+import { ISearchClaimsPolicyDto } from 'src/app/Entites/dtos/claims/search-claims-policy-dto';
+import { ICommonDto } from 'src/app/Entites/dtos/common/common-dto';
+import { IDateDto } from 'src/app/Entites/dtos/common/date-dto';
+import { IDropDownDto } from 'src/app/Entites/dtos/common/drop-down-dto';
+import { IPreviousClaimDto } from 'src/app/Entites/dtos/common/previous-claims-dto';
+import { IAddUpdateClaimsModel } from 'src/app/Entites/models/claims/add-update-claims-model';
+import { IClaimsDocumentModel } from 'src/app/Entites/models/claims/claims-document-model';
 import { IClaimsService } from 'src/app/services/claims/abstracts/claims.iservice';
 import { ICommonService } from 'src/app/services/common-service/abstracts/common.iservice';
-import { FormMode } from 'src/app/utilities/enums/enum';
+import { FormMode } from 'src/app/shared/utilities/enums/enum';
 import Swal from 'sweetalert2';
 
 @Component({

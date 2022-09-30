@@ -1,4 +1,4 @@
-import { IDateDto } from "src/app/dtos/common/date-dto";
+import { IDateDto } from "src/app/Entites/dtos/common/date-dto";
 import { IDocumentModel } from "../common/document-model";
 import { ICustomerFormDataModel } from "../customer/customer-form-data-model";
 import { IAddOnRiderModel } from "./add-on-rider-model";

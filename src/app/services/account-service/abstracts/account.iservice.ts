@@ -1,5 +1,5 @@
 import { Observable } from "rxjs";
-import { ILoginModel } from "src/app/models/account/login-model";
+import { ILoginModel } from "src/app/Entites/models/account/login-model";
 
 export abstract class IAccountService {
     abstract login(model: ILoginModel): Observable<any>;

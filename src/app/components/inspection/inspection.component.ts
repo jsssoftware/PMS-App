@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormMode } from 'src/app/utilities/enums/enum';
+import { FormMode } from 'src/app/shared/utilities/enums/enum';
 
 @Component({
   selector: 'app-inspection',
