@@ -5,8 +5,8 @@ import { ILoginDto } from 'src/app/app-entites/dtos/login/login-dto';
 import { ILoginModel } from 'src/app/app-entites/models/account/login-model';
 import { IAccountService } from 'src/app/app-services/account-service/abstracts/account.iservice';
 import Swal from 'sweetalert2';
-import { IApiManagerService } from '../../app-services/api-manager/abstracts/api-manager-iservice';
-import { ICommonService } from '../../app-services/common-service/abstracts/common.iservice';
+import { IApiManagerService } from '../../../app-services/api-manager/abstracts/api-manager-iservice';
+import { ICommonService } from '../../../app-services/common-service/abstracts/common.iservice';
 
 @Component({
   selector: 'app-login',

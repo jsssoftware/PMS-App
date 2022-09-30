@@ -18,9 +18,9 @@ import { IMotorPolicyFormDataModel } from 'src/app/app-entites/models/motor/moto
 import { ICustomerService } from 'src/app/app-services/customer-service/abstracts/customer.iservice';
 import { IPaymentFormDataModel } from 'src/app/app-entites/models/motor/payment-form-data-model';
 import { PolicyType, SearchPolicyType, Vertical } from 'src/app/shared/utilities/enums/enum';
-import { IPolicyTermDto } from '../../../app-entites/dtos/motor/policy-term-dto';
-import { ICommonService } from '../../../app-services/common-service/abstracts/common.iservice';
-import { IMotorService } from '../../../app-services/motor-service/abstracts/motor.iservice';
+import { IPolicyTermDto } from '../../../../app-entites/dtos/motor/policy-term-dto';
+import { ICommonService } from '../../../../app-services/common-service/abstracts/common.iservice';
+import { IMotorService } from '../../../../app-services/motor-service/abstracts/motor.iservice';
 import { ICustomerShortDetailDto } from 'src/app/app-entites/dtos/customer/customer-short-detail-dto';
 import { MatDialog } from '@angular/material/dialog';
 import { MotorDialogBoxComponent } from '../motor-dialog-box/motor-dialog-box.component';
@@ -33,7 +33,7 @@ import { IPolicyVoucherDto } from 'src/app/app-entites/dtos/common/policy-vouche
 import { IPolicyInspectionDto } from 'src/app/app-entites/dtos/common/policy-inspection-dto';
 import { InspectionDetailComponent } from './inspection-detail/inspection-detail.component';
 import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
-import { ViewClaimsComponent } from '../../claims/view-claims/view-claims.component';
+import { ViewClaimsComponent } from '../../../sub-system/claims/view-claims/view-claims.component';
 import { IPolicyDocumentDto } from 'src/app/app-entites/dtos/common/policy-document-dto';
 import { v4 as uuidv4 } from 'uuid';
 
