@@ -1,13 +1,13 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './shared/auth-guard/auth.guard';
-import { LoginComponent } from './components/login/login.component';
+import { LoginComponent } from './app-modules/login/login.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
   { path: 'login', component: LoginComponent, pathMatch: "full" },
   { path: 'user', 
-  loadChildren: () => import('./components/motor/motor.module').then(m => m.MotorModule) 
+  loadChildren: () => import('./app-modules/motor/motor.module').then(m => m.MotorModule) 
  }
 ];
 
