@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './shared/material-module';
 import { MenuItems } from './shared/sidebar-menu';
-import { Services } from './register-services/register.service';
+import { Services } from './services/register.service';
 import { LoginComponent } from './components/login/login.component';
 import { MotorModule } from './components/motor/motor.module';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
