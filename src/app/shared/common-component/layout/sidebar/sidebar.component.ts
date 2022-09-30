@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone, OnDestroy, ViewChild, HostListener, Directive, AfterViewInit, Input } from '@angular/core';
 import { MediaMatcher } from '@angular/cdk/layout';
-import { MenuItems } from '../../../shared/utilities/helpers/sidebar-menu';
+import { MenuItems } from '../../../utilities/helpers/sidebar-menu';
 import { Router } from '@angular/router';   
 
 export class SubNavigationMenu {

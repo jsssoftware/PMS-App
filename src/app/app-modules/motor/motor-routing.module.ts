@@ -11,7 +11,7 @@ import { DashboardComponent } from '../dashboard/dashboard.component';
 import { AddInspectionComponent } from '../inspection/add-inspection/add-inspection.component';
 import { InspectionComponent } from '../inspection/inspection.component';
 import { SearchInspectionComponent } from '../inspection/search-inspection/search-inspection.component';
-import { LayoutComponent } from '../layout/layout.component';
+import { LayoutComponent } from '../../shared/common-component/layout/layout.component';
 import { SearchPolicyComponent } from '../policy/search-policy/search-policy.component';
 import { AddVoucherComponent } from '../voucher/add-voucher/add-voucher.component';
 import { SearchVoucherComponent } from '../voucher/search-voucher/search-voucher.component';

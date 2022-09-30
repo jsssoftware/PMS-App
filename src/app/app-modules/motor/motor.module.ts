@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MotorPolicyComponent } from './motor-policy-data/motor-policy.component';
 import { MotorRoutingModule } from './motor-routing.module';
-import { LayoutComponent } from '../layout/layout.component';
-import { HeaderComponent } from '../layout/header/header.component';
-import { SidebarComponent } from '../layout/sidebar/sidebar.component';
+import { LayoutComponent } from '../../shared/common-component/layout/layout.component';
+import { HeaderComponent } from '../../shared/common-component/layout/header/header.component';
+import { SidebarComponent } from '../../shared/common-component/layout/sidebar/sidebar.component';
 import { CustomerComponent } from '../customer/customer.component';
 import { AddCustomerComponent } from '../customer/add-customer/add-customer.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -18,8 +18,8 @@ import { MotorDialogBoxComponent } from './motor-dialog-box/motor-dialog-box.com
 import { VoucherDetailComponent } from './motor-policy-data/voucher-detail/voucher-detail.component';
 import { EndorsementInformationComponent } from './motor-policy-data/endorsement-information/endorsement-information.component';
 import { ClaimInformationComponent } from './motor-policy-data/claim-information/claim-information.component';
-import { TopMenuComponent } from '../layout/top-menu/top-menu.component'; 
-import { MenuItemComponent } from '../layout/menu-item/menu-item.component';
+import { TopMenuComponent } from '../../shared/common-component/layout/top-menu/top-menu.component'; 
+import { MenuItemComponent } from '../../shared/common-component/layout/menu-item/menu-item.component';
 
 
 
