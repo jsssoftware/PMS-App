@@ -509,7 +509,7 @@ export class AddCustomerComponent implements OnInit, AfterViewInit, ErrorStateMa
   }
 
   cancelCustomer(): void {
-    this.router.navigate(["/user/customer"]);
+    this.router.navigate(["/master/customer"]);
     // Swal.fire({
     //   position: 'top-end',
     //   icon: 'error',

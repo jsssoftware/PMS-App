@@ -18,7 +18,7 @@ export class MotorPolicyManagementComponent implements OnInit {
   routeWithEnum(enumName: string){
     switch (enumName){
       case "New": 
-      this.router.navigate(["/user/customer/"+SearchPolicyType.Motor_New+"/"+Vertical.Motor+""]);
+      this.router.navigate(["/master/customer/"+SearchPolicyType.Motor_New+"/"+Vertical.Motor+""]);
       break;
       case "Renew": 
       this.router.navigate(["/user/search-policy/"+SearchPolicyType.Motor_Renew+"/"+Vertical.Motor+""]);
@@ -39,7 +39,7 @@ export class MotorPolicyManagementComponent implements OnInit {
       this.router.navigate(["/user/search-policy/"+SearchPolicyType.Motor_View+"/"+Vertical.Motor+""]);
       break;
       case "rollover":
-      this.router.navigate(["/user/customer/"+SearchPolicyType.Motor_rollover+"/"+Vertical.Motor+""]);
+      this.router.navigate(["/master/customer/"+SearchPolicyType.Motor_rollover+"/"+Vertical.Motor+""]);
 
   }
 }

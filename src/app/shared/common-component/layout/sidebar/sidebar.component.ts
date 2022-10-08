@@ -58,7 +58,7 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.router.navigate(['./user/dashboard']);
         break;
       case 'Customer':
-        this.router.navigate(['./user/customer']);
+        this.router.navigate(['./master/customer']);
         break;
       case 'Policy Management':
         this.router.navigate(['./user/motor/motor-policy-management']);

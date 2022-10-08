@@ -60,11 +60,11 @@ export class CustomerComponent implements OnInit {
   }
 
   addCustomer(): void {
-    this.router.navigate(["/user/add-customer", this._input]);
+    this.router.navigate(["/master/add-customer", this._input]);
   }
 
   editCustomer(customerId: any): void {
-    this.router.navigate(["/user/edit-customer", customerId]);
+    this.router.navigate(["/master/edit-customer", customerId]);
   }
 
 

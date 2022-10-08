@@ -1890,8 +1890,8 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   }
 
   searchCustomer() {
-    this.router.navigate(["/user/customer/"+SearchPolicyType.Motor_New+"/"+Vertical.Motor+""]);
-    // this.router.navigate(["/user/customer", 1]);
+    this.router.navigate(["/master/customer/"+SearchPolicyType.Motor_New+"/"+Vertical.Motor+""]);
+    // this.router.navigate(["/master/customer", 1]);
   }
 
   businessDoneBy() {

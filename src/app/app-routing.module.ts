@@ -1,6 +1,5 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './shared/auth-guard/auth.guard';
 import { LoginComponent } from './shared/common-component/login/login.component';
 
 const routes: Routes = [
@@ -11,6 +10,9 @@ const routes: Routes = [
   }, 
   { path: 'subsystem', 
     loadChildren: () => import('./app-modules/sub-system/subsystem.module').then(m => m.SubSystemModule)  
+  }, 
+  { path: 'master', 
+    loadChildren: () => import('./app-modules/master/master.module').then(m => m.MasterModule)  
   } 
 ];
 
