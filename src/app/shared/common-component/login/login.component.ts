@@ -61,7 +61,7 @@ export class LoginComponent implements OnInit {
           icon: 'success',
           title: 'You have successfully logged in',
           showConfirmButton: false,
-          timer: 2000,
+          timer: 1000,
           showClass: {
             popup: 'animate__animated animate__fadeInRightBig'
           }

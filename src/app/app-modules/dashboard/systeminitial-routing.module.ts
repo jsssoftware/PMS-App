@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/auth-guard/auth.guard';  
 import { LayoutComponent } from 'src/app/shared/common-component/layout/layout.component';
 import { DashboardComponent } from './dashboard.component';
+import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
   
 const routes: Routes = [
   {
@@ -11,7 +12,11 @@ const routes: Routes = [
       {
         path: 'dashboard',
         component: DashboardComponent,
-      }   
+      },
+      {
+        path: 'wip',
+        component: WorkInProgressComponent,
+      }      
     ]
   }
 ];

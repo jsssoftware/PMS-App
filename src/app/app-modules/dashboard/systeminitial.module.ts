@@ -6,12 +6,14 @@ import { MaterialModule } from 'src/app/shared/common-module/material-module';
 import { MaterialFileInputModule } from 'ngx-material-file-input';  
 import { DashboardComponent } from './dashboard.component';
 import { SystemInitialRoutingModule } from './systeminitial-routing.module';
+import { WorkInProgressComponent } from './work-in-progress/work-in-progress.component';
 
 
 
 @NgModule({
   declarations: [  
-    DashboardComponent
+    DashboardComponent, 
+    WorkInProgressComponent
   ],
   imports: [
     CommonModule,

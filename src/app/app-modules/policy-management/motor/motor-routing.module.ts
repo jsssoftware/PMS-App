@@ -9,7 +9,7 @@ import { MotorPolicyManagementComponent } from './motor-policy-management/motor-
   
 const routes: Routes = [
   {
-    path: 'policymanagement', component: LayoutComponent, canActivateChild: [AuthGuard],
+    path: 'pms', component: LayoutComponent, canActivateChild: [AuthGuard],
     children: [ 
       {
         path: 'motor',
