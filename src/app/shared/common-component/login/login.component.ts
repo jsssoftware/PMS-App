@@ -24,6 +24,9 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (sessionStorage.getItem('oauth-token') != null) {
+      this.router.navigate(["/user/dashboard"]);
+    }
   }
 
   //#region 
