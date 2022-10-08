@@ -10,7 +10,6 @@ import { MenuItems } from './shared/utilities/helpers/sidebar-menu';
 import { Services } from './app-services/register.service';
 import { LoginComponent } from './shared/common-component/login/login.component';
 import { MotorModule } from './app-modules/policy-management/motor/motor.module';
-import { DashboardComponent } from './app-modules/dashboard/dashboard.component';
 import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AuthGuard } from './shared/auth-guard/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
@@ -30,12 +29,12 @@ import { EndorsementInformationComponent } from './app-modules/policy-management
 import { ClaimInformationComponent } from './app-modules/policy-management/motor/motor-policy-data/claim-information/claim-information.component';
 import { SubSystemModule } from './app-modules/sub-system/subsystem.module';
 import { MasterModule } from './app-modules/master/master.module';
+import { SystemInitialModule } from './app-modules/dashboard/systeminitial.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
-    DashboardComponent,
+    LoginComponent, 
     
     LayoutComponent,
     HeaderComponent,
@@ -63,6 +62,7 @@ import { MasterModule } from './app-modules/master/master.module';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    SystemInitialModule,
     MotorModule,
     SubSystemModule,
     MasterModule,
