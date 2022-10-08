@@ -19,7 +19,6 @@ import { TopMenuComponent } from './shared/common-component/layout/top-menu/top-
 import { MenuItemComponent } from './shared/common-component/layout/menu-item/menu-item.component';
 import { MotorPolicyComponent } from './app-modules/policy-management/motor/motor-policy-data/motor-policy.component';
 import { MotorPolicyManagementComponent } from './app-modules/policy-management/motor/motor-policy-management/motor-policy-management.component';
-import { SearchPolicyComponent } from './shared/common-component/search-policy/search-policy.component';
 import { InspectionDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/inspection-detail/inspection-detail.component';
 import { MotorDialogBoxComponent } from './app-modules/policy-management/motor/motor-dialog-box/motor-dialog-box.component';
 import { VoucherDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/voucher-detail/voucher-detail.component';
@@ -32,16 +31,13 @@ import { SystemInitialModule } from './app-modules/dashboard/systeminitial.modul
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent, 
-    
+    LoginComponent,  
     HeaderComponent,
     TopMenuComponent,
-    MenuItemComponent,  
-
+    MenuItemComponent,    
 
     MotorPolicyComponent, 
     MotorPolicyManagementComponent,
-    SearchPolicyComponent,
     InspectionDetailComponent,
     MotorDialogBoxComponent,
     VoucherDetailComponent,
