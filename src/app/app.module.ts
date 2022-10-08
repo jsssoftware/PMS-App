@@ -21,8 +21,6 @@ import { MotorPolicyManagementComponent } from './app-modules/policy-management/
 import { InspectionDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/inspection-detail/inspection-detail.component';
 import { MotorDialogBoxComponent } from './app-modules/policy-management/motor/motor-dialog-box/motor-dialog-box.component';
 import { VoucherDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/voucher-detail/voucher-detail.component';
-import { EndorsementInformationComponent } from './app-modules/policy-management/motor/motor-policy-data/endorsement-information/endorsement-information.component';
-import { ClaimInformationComponent } from './app-modules/policy-management/motor/motor-policy-data/claim-information/claim-information.component';
 import { SubSystemModule } from './app-modules/sub-system/subsystem.module';
 import { MasterModule } from './app-modules/master/master.module';
 import { SystemInitialModule } from './app-modules/dashboard/systeminitial.module';
@@ -35,14 +33,11 @@ import { SystemInitialModule } from './app-modules/dashboard/systeminitial.modul
     TopMenuComponent,
     MenuItemComponent,    
 
+    MotorDialogBoxComponent,
     MotorPolicyComponent, 
     MotorPolicyManagementComponent,
-    InspectionDetailComponent,
-    MotorDialogBoxComponent,
-    VoucherDetailComponent,
-    EndorsementInformationComponent,
-    ClaimInformationComponent, 
-    
+    InspectionDetailComponent, // in popup used
+    VoucherDetailComponent, // in popup used
   ],
   imports: [
     BrowserModule,
