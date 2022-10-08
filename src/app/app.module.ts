@@ -14,10 +14,8 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
 import { AuthGuard } from './shared/auth-guard/auth.guard';
 import { JwtHelperService, JWT_OPTIONS } from '@auth0/angular-jwt';
 import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function'; 
-import { LayoutComponent } from './shared/common-component/layout/layout.component';
 import { HeaderComponent } from './shared/common-component/layout/header/header.component';
 import { TopMenuComponent } from './shared/common-component/layout/top-menu/top-menu.component';
-import { SidebarComponent } from './shared/common-component/layout/sidebar/sidebar.component';
 import { MenuItemComponent } from './shared/common-component/layout/menu-item/menu-item.component';
 import { MotorPolicyComponent } from './app-modules/policy-management/motor/motor-policy-data/motor-policy.component';
 import { MotorPolicyManagementComponent } from './app-modules/policy-management/motor/motor-policy-management/motor-policy-management.component';
@@ -36,10 +34,8 @@ import { SystemInitialModule } from './app-modules/dashboard/systeminitial.modul
     AppComponent,
     LoginComponent, 
     
-    LayoutComponent,
     HeaderComponent,
     TopMenuComponent,
-    SidebarComponent,
     MenuItemComponent,  
 
 

@@ -1,7 +1,6 @@
 import { NgModule} from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/auth-guard/auth.guard'; 
-import { LayoutComponent } from 'src/app/shared/common-component/layout/layout.component';
 import { AddClaimsComponent } from './claims/add-claims/add-claims.component';
 import { ClaimsComponent } from './claims/claims.component';
 import { SearchClaimsComponent } from './claims/search-claims/search-claims.component';

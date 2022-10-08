@@ -1,8 +1,6 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/auth-guard/auth.guard'; 
-import { DashboardComponent } from '../../dashboard/dashboard.component';
-import { LayoutComponent } from '../../../shared/common-component/layout/layout.component';
 import { SearchPolicyComponent } from '../../../shared/common-component/search-policy/search-policy.component';
 import { MotorPolicyComponent } from './motor-policy-data/motor-policy.component';
 import { MotorPolicyManagementComponent } from './motor-policy-management/motor-policy-management.component';
