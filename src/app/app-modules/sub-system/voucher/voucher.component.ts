@@ -16,19 +16,19 @@ export class VoucherComponent implements OnInit {
   navigate(route: string) {
     switch (route) {
       case "New":
-        this.router.navigate(["/user/voucher-form", "add", -1, 0]);
+        this.router.navigate(["/subsystem/voucher-form", "add", -1, 0]);
         break;
       case "View":
-        this.router.navigate(["/user/search-voucher", 1]);
+        this.router.navigate(["/subsystem/search-voucher", 1]);
         break;
       case "Verify":
-        this.router.navigate(["/user/search-voucher", 2]);
+        this.router.navigate(["/subsystem/search-voucher", 2]);
         break;
       case "Update":
-        this.router.navigate(["/user/search-voucher", 3]);
+        this.router.navigate(["/subsystem/search-voucher", 3]);
         break;
       case "UpdateControlNumber":
-        this.router.navigate(["/user/search-voucher", 4]);
+        this.router.navigate(["/subsystem/search-voucher", 4]);
         break;
     }
   }

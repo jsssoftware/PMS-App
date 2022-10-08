@@ -67,13 +67,13 @@ export class SidebarComponent implements OnInit, OnDestroy {
         this.router.navigate(['./user/health/health-policy-management']);
         break;
       case 'Voucher':
-        this.router.navigate(['./user/voucher']);
+        this.router.navigate(['./subsystem/voucher']);
         break;
       case 'Claims':
-        this.router.navigate(['./user/claims']);
+        this.router.navigate(['./subsystem/claims']);
         break;
       case 'Inspection':
-        this.router.navigate(['./user/inspection']);
+        this.router.navigate(['./subsystem/inspection']);
         break;
       default:
         break;

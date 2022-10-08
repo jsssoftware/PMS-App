@@ -204,7 +204,7 @@ export class SearchVoucherComponent implements OnInit, AfterViewInit {
   }
 
   navigate(data: ISearchVoucherDto): void {
-    this.router.navigate(["/user/voucher-form", "update", data.VoucherId, this._form]);
+    this.router.navigate(["/subsystem/voucher-form", "update", data.VoucherId, this._form]);
   }
 
   reset(): void {

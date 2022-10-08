@@ -29,6 +29,22 @@ import { SearchInspectionComponent } from './app-modules/sub-system/inspection/s
 import { SearchPolicyInspectionComponent } from './app-modules/sub-system/inspection/search-policy-inspection/search-policy-inspection.component';
 import { AddInspectionComponent } from './app-modules/sub-system/inspection/add-inspection/add-inspection.component';
 import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function'; 
+import { LayoutComponent } from './shared/common-component/layout/layout.component';
+import { HeaderComponent } from './shared/common-component/layout/header/header.component';
+import { TopMenuComponent } from './shared/common-component/layout/top-menu/top-menu.component';
+import { SidebarComponent } from './shared/common-component/layout/sidebar/sidebar.component';
+import { MenuItemComponent } from './shared/common-component/layout/menu-item/menu-item.component';
+import { MotorPolicyComponent } from './app-modules/policy-management/motor/motor-policy-data/motor-policy.component';
+import { CustomerComponent } from './app-modules/master/customer/customer.component';
+import { AddCustomerComponent } from './app-modules/master/customer/add-customer/add-customer.component';
+import { MotorPolicyManagementComponent } from './app-modules/policy-management/motor/motor-policy-management/motor-policy-management.component';
+import { SearchPolicyComponent } from './shared/common-component/search-policy/search-policy.component';
+import { InspectionDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/inspection-detail/inspection-detail.component';
+import { MotorDialogBoxComponent } from './app-modules/policy-management/motor/motor-dialog-box/motor-dialog-box.component';
+import { VoucherDetailComponent } from './app-modules/policy-management/motor/motor-policy-data/voucher-detail/voucher-detail.component';
+import { EndorsementInformationComponent } from './app-modules/policy-management/motor/motor-policy-data/endorsement-information/endorsement-information.component';
+import { ClaimInformationComponent } from './app-modules/policy-management/motor/motor-policy-data/claim-information/claim-information.component';
+import { SubSystemModule } from './app-modules/sub-system/subsystem.module';
 
 @NgModule({
   declarations: [
@@ -48,7 +64,26 @@ import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function
     InspectionComponent,
     AddInspectionComponent,
     SearchInspectionComponent,
-    SearchPolicyInspectionComponent 
+    SearchPolicyInspectionComponent,
+    
+    LayoutComponent,
+    HeaderComponent,
+    TopMenuComponent,
+    SidebarComponent,
+    MenuItemComponent,  
+
+
+    MotorPolicyComponent,
+    CustomerComponent,
+    AddCustomerComponent,
+    MotorPolicyManagementComponent,
+    SearchPolicyComponent,
+    InspectionDetailComponent,
+    MotorDialogBoxComponent,
+    VoucherDetailComponent,
+    EndorsementInformationComponent,
+    ClaimInformationComponent, 
+    
   ],
   imports: [
     BrowserModule,
@@ -60,6 +95,7 @@ import { CommonFunction } from 'src/app/shared/utilities/helpers/common-function
     BrowserAnimationsModule,
     MaterialModule,
     MotorModule,
+    SubSystemModule,
     MaterialFileInputModule
   ],
   providers: [MenuItems,CommonFunction, Services, AuthGuard, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],

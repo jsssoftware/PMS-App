@@ -205,7 +205,7 @@ export class AddInspectionComponent implements OnInit {
             text: response.Message,
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['./user/inspection']);
+              this.router.navigate(['./subsystem/inspection']);
             }
           });
         }
@@ -227,7 +227,7 @@ export class AddInspectionComponent implements OnInit {
             text: response.Message,
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['./user/inspection']);
+              this.router.navigate(['./subsystem/inspection']);
             }
           });
         }
@@ -354,7 +354,7 @@ export class AddInspectionComponent implements OnInit {
   }
 
   onClose(): void {
-    this.router.navigate(['./user/inspection']);
+    this.router.navigate(['./subsystem/inspection']);
   }
 
   addDocument(): void {

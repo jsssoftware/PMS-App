@@ -16,10 +16,10 @@ export class InspectionComponent implements OnInit {
 
   navigate(route: number) {
     if (route == FormMode.Add) {
-      this.router.navigate(["/user/inspection", route, 0]);
+      this.router.navigate(["/subsystem/inspection", route, 0]);
     }
     else {
-      this.router.navigate(["/user/inspection-search", route]);
+      this.router.navigate(["/subsystem/inspection-search", route]);
     }
   }
 }

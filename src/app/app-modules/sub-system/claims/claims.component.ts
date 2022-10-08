@@ -16,10 +16,10 @@ export class ClaimsComponent implements OnInit {
 
   navigate(route: number) {
     if (route == FormMode.Add) {
-      this.router.navigate(["/user/claims-search-policy"]);
+      this.router.navigate(["/subsystem/claims-search-policy"]);
     }
     else {
-      this.router.navigate(["/user/search-claims", route]);
+      this.router.navigate(["/subsystem/search-claims", route]);
     }
 
   }

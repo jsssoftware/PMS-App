@@ -76,7 +76,7 @@ export class SearchInspectionComponent implements OnInit {
   };
 
   onClose() {
-    this.router.navigate(["/user/inspection"]);
+    this.router.navigate(["/subsystem/inspection"]);
   };
 
   onReset() {
@@ -180,7 +180,7 @@ export class SearchInspectionComponent implements OnInit {
   }
 
   navigate(data: ISearchInspectionDto): void {
-    this.router.navigate(["/user/inspection", this._form, data.InspectionId]);
+    this.router.navigate(["/subsystem/inspection", this._form, data.InspectionId]);
   }
 
   private getPayload(): ISearchInspectionModel {

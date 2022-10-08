@@ -274,10 +274,10 @@ export class SearchPolicyClaimsComponent implements OnInit {
   }
 
   onClose(): void {
-    this.router.navigate(["/user/claims"]);
+    this.router.navigate(["/subsystem/claims"]);
   }
 
   navigate(data: IClaimsSearchPolicyDto): void {
-    this.router.navigate(["/user/claims", FormMode.Add, 0, data.PolicyId, data.VerticalId]);
+    this.router.navigate(["/subsystem/claims", FormMode.Add, 0, data.PolicyId, data.VerticalId]);
   }
 }

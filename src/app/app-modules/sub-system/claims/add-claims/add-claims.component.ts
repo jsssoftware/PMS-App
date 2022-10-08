@@ -250,7 +250,7 @@ export class AddClaimsComponent implements OnInit {
             text: response.Message,
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['./user/claims']);
+              this.router.navigate(['./subsystem/claims']);
             }
           });
         }
@@ -272,7 +272,7 @@ export class AddClaimsComponent implements OnInit {
             text: response.Message,
           }).then((result) => {
             if (result.isConfirmed) {
-              this.router.navigate(['./user/claims']);
+              this.router.navigate(['./subsystem/claims']);
             }
           });
         }
@@ -533,6 +533,6 @@ export class AddClaimsComponent implements OnInit {
   }
 
   onClose(): void {
-    this.router.navigate(['./user/claims']);
+    this.router.navigate(['./subsystem/claims']);
   }
 }

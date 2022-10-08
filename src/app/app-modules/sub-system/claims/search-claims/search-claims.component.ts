@@ -197,7 +197,7 @@ export class SearchClaimsComponent implements OnInit, AfterViewInit {
   }
 
   navigate(data: ISearchClaimsDto): void {
-    this.router.navigate(["/user/claims", this._form, data.ClaimsId, data.PolicyId, data.VerticalId]);
+    this.router.navigate(["/subsystem/claims", this._form, data.ClaimsId, data.PolicyId, data.VerticalId]);
   }
 
   reset(): void {

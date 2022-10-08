@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common'; 
-import { MotorRoutingModule } from './motor-routing.module'; 
+import { CommonModule } from '@angular/common';  
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from 'src/app/shared/common-module/material-module';
 import { MaterialFileInputModule } from 'ngx-material-file-input'; 
+import { SubSystemRoutingModule } from './subsystem-routing.module';
 
 
 
@@ -13,7 +13,7 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
   ],
   imports: [
     CommonModule,
-    MotorRoutingModule,
+    SubSystemRoutingModule,
     HttpClientModule,
     MaterialModule,
     FormsModule,
@@ -21,4 +21,4 @@ import { MaterialFileInputModule } from 'ngx-material-file-input';
     MaterialFileInputModule
   ]
 })
-export class MotorModule { }
+export class SubSystemModule { }

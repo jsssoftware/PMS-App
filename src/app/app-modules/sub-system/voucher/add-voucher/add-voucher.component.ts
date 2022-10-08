@@ -314,7 +314,7 @@ export class AddVoucherComponent implements OnInit, AfterViewInit {
               text: response.Message,
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['./user/voucher']);
+                this.router.navigate(['./subsystem/voucher']);
               }
             });
           }
@@ -338,7 +338,7 @@ export class AddVoucherComponent implements OnInit, AfterViewInit {
               text: response.Message,
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['./user/voucher']);
+                this.router.navigate(['./subsystem/voucher']);
               }
             });
           }
@@ -363,7 +363,7 @@ export class AddVoucherComponent implements OnInit, AfterViewInit {
               text: response.Message,
             }).then((result) => {
               if (result.isConfirmed) {
-                this.router.navigate(['./user/voucher']);
+                this.router.navigate(['./subsystem/voucher']);
               }
             });
           }
@@ -635,7 +635,7 @@ export class AddVoucherComponent implements OnInit, AfterViewInit {
   }
 
   onClose(): void {
-    this.router.navigate(['./user/voucher']);
+    this.router.navigate(['./subsystem/voucher']);
   }
 
   padLeftZero = (value: number): string => value > 9 ? `${value}` : `0${value}`;
