@@ -6,7 +6,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MaterialModule } from './shared/common-module/material-module';
-import { MenuItems } from './shared/utilities/helpers/sidebar-menu';
 import { Services } from './app-services/register.service';
 import { LoginComponent } from './shared/common-component/login/login.component';
 import { MotorModule } from './app-modules/policy-management/motor/motor.module';
@@ -60,7 +59,7 @@ import { SystemInitialModule } from './app-modules/dashboard/systeminitial.modul
     MasterModule,
     MaterialFileInputModule
   ],
-  providers: [MenuItems,CommonFunction, Services, AuthGuard, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],
+  providers: [CommonFunction, Services, AuthGuard, { provide: JWT_OPTIONS, useValue: JWT_OPTIONS }, JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
