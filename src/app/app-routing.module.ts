@@ -3,20 +3,20 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './shared/common-component/login/login.component';
 
 const routes: Routes = [
-  { path: 'login', component: LoginComponent, pathMatch: "full" },
+  { path: 'login', component: LoginComponent, pathMatch: "full"},
   { path: 'user', 
-    loadChildren: () => import('./app-modules/dashboard/systeminitial.module').then(m => m.SystemInitialModule)  
+    loadChildren: () => import('./app-modules/dashboard/systeminitial.module').then(m => m.SystemInitialModule)
   },
   { path: 'pms', 
-    loadChildren: () => import('./app-modules/policy-management/motor/motor.module').then(m => m.MotorModule)  
+    loadChildren: () => import('./app-modules/policy-management/motor/motor.module').then(m => m.MotorModule) 
   }, 
   { path: 'subsystem', 
-    loadChildren: () => import('./app-modules/sub-system/subsystem.module').then(m => m.SubSystemModule)  
+    loadChildren: () => import('./app-modules/sub-system/subsystem.module').then(m => m.SubSystemModule) 
   }, 
   { path: 'master', 
-    loadChildren: () => import('./app-modules/master/master.module').then(m => m.MasterModule)  
+    loadChildren: () => import('./app-modules/master/master.module').then(m => m.MasterModule) 
   },
-  { path: '', component: LoginComponent },
+  { path: '', component: LoginComponent},
 ];
 
 @NgModule({

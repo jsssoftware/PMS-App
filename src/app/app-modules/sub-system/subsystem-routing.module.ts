@@ -15,7 +15,7 @@ import { VoucherComponent } from './voucher/voucher.component';
 
 const routes: Routes = [
   {
-    path: 'subsystem', component: LayoutComponent, canActivateChild: [AuthGuard],
+    path: 'subsystem', canActivateChild: [AuthGuard],
     children: [ 
       {
         path: 'voucher',

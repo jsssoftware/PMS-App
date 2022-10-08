@@ -5,7 +5,6 @@ import { ILoginDto } from 'src/app/app-entites/dtos/login/login-dto';
 import { ILoginModel } from 'src/app/app-entites/models/account/login-model';
 import { IAccountService } from 'src/app/app-services/account-service/abstracts/account.iservice';
 import Swal from 'sweetalert2';
-import { IApiManagerService } from '../../../app-services/api-manager/abstracts/api-manager-iservice';
 import { ICommonService } from '../../../app-services/common-service/abstracts/common.iservice';
 
 @Component({
@@ -55,7 +54,6 @@ export class LoginComponent implements OnInit {
         sessionStorage.setItem('branchId', this.loginForm.value.branch);
         sessionStorage.setItem('branchName', this._branchs.filter((f: any) => f.Value === this.loginForm.value.branch)[0].Name)
         sessionStorage.setItem('oauth-token', response.access_token);
-        this.router.navigate(["/user/dashboard"]);
         Swal.fire({
           position: 'top-end',
           icon: 'success',
@@ -65,8 +63,10 @@ export class LoginComponent implements OnInit {
           showClass: {
             popup: 'animate__animated animate__fadeInRightBig'
           }
-        });
-        
+        }); 
+        this.router.navigate(["/user/dashboard"]).then(() => {
+            window.location.reload();
+        });    
       }
       else {
         Swal.fire({

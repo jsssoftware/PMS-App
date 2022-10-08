@@ -7,7 +7,7 @@ import { CustomerComponent } from './customer/customer.component';
 
 const routes: Routes = [
     {
-        path: 'master', component: LayoutComponent, canActivateChild: [AuthGuard],
+        path: 'master', canActivateChild: [AuthGuard],
         children: [
             {
                 path: 'customer',

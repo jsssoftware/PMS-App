@@ -7,7 +7,7 @@ import { WorkInProgressComponent } from './work-in-progress/work-in-progress.com
   
 const routes: Routes = [
   {
-    path: 'user', component: LayoutComponent, canActivateChild: [AuthGuard],
+    path: 'user', canActivateChild: [AuthGuard],
     children: [
       {
         path: 'dashboard',
