@@ -24,6 +24,7 @@ import { VoucherDetailComponent } from './app-modules/policy-management/motor/mo
 import { SubSystemModule } from './app-modules/sub-system/subsystem.module';
 import { MasterModule } from './app-modules/master/master.module';
 import { SystemInitialModule } from './app-modules/dashboard/systeminitial.module';
+import { PolicyManagementModule } from './app-modules/policy-management/policymanagement.module';
 
 @NgModule({
   declarations: [
@@ -49,6 +50,7 @@ import { SystemInitialModule } from './app-modules/dashboard/systeminitial.modul
     BrowserAnimationsModule,
     MaterialModule,
     SystemInitialModule,
+    PolicyManagementModule,
     MotorModule,
     SubSystemModule,
     MasterModule,
