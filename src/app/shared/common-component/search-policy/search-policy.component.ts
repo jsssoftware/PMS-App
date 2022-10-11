@@ -211,7 +211,7 @@ export class SearchPolicyComponent implements OnInit {
   }
 
   routeToMotorPolicy(policyId: number) {
-    this.router.navigate(["/user/motor", { policyId, policyTypeId: this._policyTypeId }]);
+    this.router.navigate(["/pms/motor", { policyId, policyTypeId: this._policyTypeId }]);
   }
 
   searchPolicy(): void {
@@ -377,6 +377,6 @@ export class SearchPolicyComponent implements OnInit {
   }
 
   backToMaster(){
-      this.router.navigate(['./user/motor/motor-policy-management']);
+      this.router.navigate(['./pms/motor/motor-policy-management']);
   }  
 }  

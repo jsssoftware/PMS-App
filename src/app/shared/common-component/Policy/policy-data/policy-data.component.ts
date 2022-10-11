@@ -1,10 +1,9 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { stringify } from '@angular/compiler/src/util';
-import { AfterViewInit, Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, FormGroupDirective, NgForm, Validators } from '@angular/forms';
 import { MatAutocompleteSelectedEvent } from '@angular/material/autocomplete';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { MatTable, MatTableDataSource } from '@angular/material/table';
+import {  MatTableDataSource } from '@angular/material/table';
 import { ICommonDto } from 'src/app/app-entites/dtos/common/common-dto';
 import { IDateDto } from 'src/app/app-entites/dtos/common/date-dto';
 import { IDropDownDto } from 'src/app/app-entites/dtos/common/drop-down-dto';
@@ -23,7 +22,6 @@ import { ICommonService } from '../../../../app-services/common-service/abstract
 import { IMotorService } from '../../../../app-services/motor-service/abstracts/motor.iservice';
 import { ICustomerShortDetailDto } from 'src/app/app-entites/dtos/customer/customer-short-detail-dto';
 import { MatDialog } from '@angular/material/dialog';
-import { MotorDialogBoxComponent } from '../motor-dialog-box/motor-dialog-box.component';
 import { IAddOnRiderModel } from 'src/app/app-entites/models/motor/add-on-rider-model';
 import Swal from 'sweetalert2';
 import * as moment from 'moment';
@@ -31,11 +29,12 @@ import { Moment } from 'moment';
 import { IPreviousClaimDto } from 'src/app/app-entites/dtos/common/previous-claims-dto';
 import { IPolicyVoucherDto } from 'src/app/app-entites/dtos/common/policy-voucher-dto';
 import { IPolicyInspectionDto } from 'src/app/app-entites/dtos/common/policy-inspection-dto';
-import { InspectionDetailComponent } from './inspection-detail/inspection-detail.component';
-import { VoucherDetailComponent } from './voucher-detail/voucher-detail.component';
-import { ViewClaimsComponent } from '../../../sub-system/claims/view-claims/view-claims.component';
 import { IPolicyDocumentDto } from 'src/app/app-entites/dtos/common/policy-document-dto';
 import { v4 as uuidv4 } from 'uuid';
+import { DialogBoxComponent } from '../dialog-box/dialog-box.component';
+import { InspectionDetailComponent } from '../detail/inspection-detail/inspection-detail.component';
+import { VoucherDetailComponent } from '../detail/voucher-detail/voucher-detail.component';
+import { ViewClaimsComponent } from 'src/app/app-modules/sub-system/claims/view-claims/view-claims.component';
 
 export interface PeriodicElement {
   endorsementReason: string;
@@ -102,11 +101,12 @@ const ELEMENT_DATA_InspectionDetail: PeriodicElementForInspectionDetail[] = [
 ];
 
 @Component({
-  selector: 'app-motor-policy-data',
-  templateUrl: './motor-policy.component.html',
-  styleUrls: ['./motor-policy.component.css']
+  selector: 'app-policy-data',
+  templateUrl: './policy-data.component.html',
+  styleUrls: ['./policy-data.component.css']
 })
-export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMatcher {
+export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMatcher {
+  @Input('MenuVertical') public MenuVertical:string='';
   @Output() tableNameToDialogBox = new EventEmitter<string>();
 
   displayedColumnsDocumentTable: string[] = ["Sno", "DocumentTypeName", "FileName", "Remarks", "DocumentTypeId"];
@@ -403,7 +403,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   public _isDisableChangeAgentCheckbox: boolean = false;
 
   public _isDisableOdPolicyDetails: boolean = false;
-  public _motorPolicyData?: IMotorPolicyFormDataModel;
+  public _policyData?: IMotorPolicyFormDataModel;
   public _verticalName: string;
   public _policyStatus: string;
   public _policyStatusColor: string;
@@ -428,9 +428,9 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       AddOnRiderId: 0,
       AddOnRiderOptionId: []
     };
-    this._verticalName = this._motorPolicyData != undefined ? this._motorPolicyData.Vertical : "MOTOR";
-    this._policyStatus = this._motorPolicyData != undefined ? this._motorPolicyData.PolicyStatus : "Active";
-    this._policyStatusColor = this._motorPolicyData != undefined ? this._motorPolicyData.PolicyStatusColor : '#fdcb6e'
+    this._verticalName = this._policyData != undefined ? this._policyData.Vertical : "MOTOR";
+    this._policyStatus = this._policyData != undefined ? this._policyData.PolicyStatus : "Active";
+    this._policyStatusColor = this._policyData != undefined ? this._policyData.PolicyStatusColor : '#fdcb6e'
   }
 
   ngAfterViewInit(): void {
@@ -658,7 +658,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   }
 
   getVehicles(): void {
-    let vehicleClassId = this._policyTypeId === "2" ? this._motorPolicyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
+    let vehicleClassId = this._policyTypeId === "2" ? this._policyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
     this.commonService.getVehicles(vehicleClassId).subscribe((response: IDropDownDto<number>[]) => {
       this._vehicles = response;
     });
@@ -794,7 +794,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   private getPolicyFormData(): any {
     return {
       PolicyTypeId: this.policyTermForm.value.policyType,
-      VehicleClassId: this._policyTypeId === "2" ? this._motorPolicyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass,
+      VehicleClassId: this._policyTypeId === "2" ? this._policyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass,
       PackageTypeId: this.policyTermForm.value.packageType,
       PolicyTermId: this.policyTermForm.value.policyTerm
     };
@@ -854,7 +854,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
     if (policy === "tp") {
 
       if (this.policyTermForm.value.policyType === PolicyType.SameCompanyRetention || this.policyTermForm.value.policyType === PolicyType.OtherCompanyRetention) {
-        let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
+        let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
         //startDate = new Date(startDate.setDate(startDate.getDate() + 1));
 
         if (startDate != null && !moment(startDate).isBefore(this.policyForm.value.tpStartDate)) {
@@ -893,7 +893,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
     if (policy === "od" || this._isDisableOdPolicyDetails) {
 
       if (this.policyTermForm.value.policyType === PolicyType.SameCompanyRetention || this.policyTermForm.value.policyType === PolicyType.OtherCompanyRetention) {
-        let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
+        let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
         //startDate = new Date(startDate.setDate(startDate.getDate() + 1));
 
         if (startDate != null && !moment(startDate).isBefore(this.policyForm.value.odStartDate)) {
@@ -956,7 +956,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
     this.commonService.getVehicleDetails(value.Value).subscribe((response: IVehicleDto) => {
       this.commonService.getModels(response.ManufacturerId).subscribe((modelResponse: IDropDownDto<number>[]) => {
         this._models = modelResponse;
-        let vehicleClassId = this._policyTypeId === "2" ? this._motorPolicyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
+        let vehicleClassId = this._policyTypeId === "2" ? this._policyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
         this.commonService.getVarients(response.ManufacturerId, response.ModelId, vehicleClassId).subscribe((varientResponse: IVarientDto[]) => {
           this._varients = varientResponse;
           let varient: IVarientDto = varientResponse.filter(f => f.VarientId == response.VarientId)[0];
@@ -1686,7 +1686,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   getMotorPolicyById(policyId: number) {
     this.motorService.getMotorPolicyById(policyId).subscribe((response: IMotorPolicyFormDataModel) => {
       console.log(response,"response");
-      this._motorPolicyData = response;
+      this._policyData = response;
       this.setMotorPolicyData(response);
     });
   }
@@ -1931,7 +1931,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   }
 
   openDialog(tableName: string, json: any) {
-    const dialogRef = this.dialog.open(MotorDialogBoxComponent, {
+    const dialogRef = this.dialog.open(DialogBoxComponent, {
       data: {
         tableNamedata: tableName,
         jsonValue: json
@@ -1994,10 +1994,10 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
     }
 
     if (this._policyTypeId === "2") {
-      let insuranceCompany = this.policyTermForm.value.packageType === 1 ? this._motorPolicyData?.TpPolicy.InsuranceCompany : this._motorPolicyData?.OdPolicy.InsuranceCompany;
-      let policyNumber = this.policyTermForm.value.packageType === 1 ? this._motorPolicyData?.TpPolicy.PolicyNumber : this._motorPolicyData?.OdPolicy.PolicyNumber;
-      let policyExpiryDate = this.policyTermForm.value.packageType === 1 ? this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto)
-        : this.commonService.getDateFromIDateDto(this._motorPolicyData?.OdPolicy.ExpiryDateDto as IDateDto);
+      let insuranceCompany = this.policyTermForm.value.packageType === 1 ? this._policyData?.TpPolicy.InsuranceCompany : this._policyData?.OdPolicy.InsuranceCompany;
+      let policyNumber = this.policyTermForm.value.packageType === 1 ? this._policyData?.TpPolicy.PolicyNumber : this._policyData?.OdPolicy.PolicyNumber;
+      let policyExpiryDate = this.policyTermForm.value.packageType === 1 ? this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto)
+        : this.commonService.getDateFromIDateDto(this._policyData?.OdPolicy.ExpiryDateDto as IDateDto);
 
       this.policyForm.patchValue({
         lastYearInsuranceCompany: insuranceCompany,
@@ -2021,7 +2021,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
   setDataForSameCompanyRetentionPolicyTypeTp() {
     if (this.policyTermForm.value.policyType === PolicyType.SameCompanyRetention && this.policyTermForm.value.packageType === 1) {
 
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
 
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -2034,7 +2034,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
         tpStartDate: moment(startDate)
       });
 
@@ -2058,18 +2058,18 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
-        policyNumber: this._motorPolicyData?.TpPolicy.PolicyNumber,
-        tpStartDate: this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.StartDateDto as IDateDto),
-        tpNumberOfYear: this._motorPolicyData?.TpPolicy.NumberOfYear,
-        tpExpiryDate: this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto)
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
+        policyNumber: this._policyData?.TpPolicy.PolicyNumber,
+        tpStartDate: this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.StartDateDto as IDateDto),
+        tpNumberOfYear: this._policyData?.TpPolicy.NumberOfYear,
+        tpExpiryDate: this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto)
       });
 
       this.policyForm.get("tpInsuranceCompany")?.disable();
       this.policyForm.get("policyNumber")?.disable();
       this.policyForm.get("tpStartDate")?.disable();
 
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
 
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -2078,7 +2078,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       }
 
       this.policyForm.patchValue({
-        odInsuranceCompany: this._motorPolicyData?.OdPolicy.InsuranceCompany,
+        odInsuranceCompany: this._policyData?.OdPolicy.InsuranceCompany,
         odStartDate: moment(startDate)
       });
 
@@ -2100,7 +2100,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
 
   setDataForSameCompanyRetentionPolicyTypeComprehensiveOrUsageBased() {
     if (this.policyTermForm.value.policyType === PolicyType.SameCompanyRetention && (this.policyTermForm.value.packageType === 3 || this.policyTermForm.value.packageType === 4)) {
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
 
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -2113,7 +2113,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
         tpStartDate: moment(startDate)
       });
 
@@ -2133,9 +2133,9 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
 
   setDataForOtherCompanyRetentionPolicyTypeTp() {
     if (this.policyTermForm.value.policyType === PolicyType.OtherCompanyRetention && this.policyTermForm.value.packageType === 1) {
-      this._tpInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._motorPolicyData?.TpPolicy.InsuranceCompany);
+      this._tpInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._policyData?.TpPolicy.InsuranceCompany);
 
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       } catch (error) {
@@ -2146,7 +2146,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
         policyNumber: undefined,
         tpStartDate: moment(startDate)
       });
@@ -2170,18 +2170,18 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
-        policyNumber: this._motorPolicyData?.TpPolicy.PolicyNumber,
-        tpStartDate: this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.StartDateDto as IDateDto),
-        tpNumberOfYear: this._motorPolicyData?.TpPolicy.NumberOfYear,
-        tpExpiryDate: this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto)
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
+        policyNumber: this._policyData?.TpPolicy.PolicyNumber,
+        tpStartDate: this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.StartDateDto as IDateDto),
+        tpNumberOfYear: this._policyData?.TpPolicy.NumberOfYear,
+        tpExpiryDate: this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto)
       });
 
       this.policyForm.get("tpInsuranceCompany")?.disable();
       this.policyForm.get("policyNumber")?.disable();
       this.policyForm.get("tpStartDate")?.disable();
 
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.OdPolicy.ExpiryDateDto as IDateDto) as Date;
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
       } catch (error) {
@@ -2198,7 +2198,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
         });
       });
 
-      this._odInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._motorPolicyData?.OdPolicy.InsuranceCompany);
+      this._odInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._policyData?.OdPolicy.InsuranceCompany);
     }
     else {
       this.policyForm.get("tpInsuranceCompany")?.enable();
@@ -2210,8 +2210,8 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
 
   setDataForOtherCompanyRetentionPolicyTypeComprehensiveOrUsageBased() {
     if (this.policyTermForm.value.policyType === PolicyType.OtherCompanyRetention && (this.policyTermForm.value.packageType === 3 || this.policyTermForm.value.packageType === 4)) {
-      this._tpInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._motorPolicyData?.TpPolicy.InsuranceCompany);
-      let startDate: Date = this.commonService.getDateFromIDateDto(this._motorPolicyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
+      this._tpInsuranceCompanies = this._insuranceCompanies.filter(f => f.Value != this._policyData?.TpPolicy.InsuranceCompany);
+      let startDate: Date = this.commonService.getDateFromIDateDto(this._policyData?.TpPolicy.ExpiryDateDto as IDateDto) as Date;
 
       try {
         startDate = new Date(startDate.setDate(startDate.getDate() + 1));
@@ -2224,7 +2224,7 @@ export class MotorPolicyComponent implements OnInit, AfterViewInit, ErrorStateMa
       if (policyTerm === undefined || policyTerm == null) return;
 
       this.policyForm.patchValue({
-        tpInsuranceCompany: this._motorPolicyData?.TpPolicy.InsuranceCompany,
+        tpInsuranceCompany: this._policyData?.TpPolicy.InsuranceCompany,
         tpStartDate: moment(startDate)
       });
 

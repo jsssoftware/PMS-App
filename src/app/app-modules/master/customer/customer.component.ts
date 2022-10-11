@@ -69,6 +69,6 @@ export class CustomerComponent implements OnInit {
 
 
   routeToMotorPolicy(customerId: number) {
-    this.router.navigate(["/user/motor", { customerId, policyTypeId: this._policyTypeId }]);
+    this.router.navigate(["/pms/motor", { customerId, policyTypeId: this._policyTypeId }]);
   }
 }

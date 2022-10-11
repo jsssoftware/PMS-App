@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MotorDialogBoxComponent } from './motor-dialog-box.component';
+import { HealthnewPolicyComponent } from './healthnew-policy.component';
 
-describe('MotorDialogBoxComponent', () => {
-  let component: MotorDialogBoxComponent;
-  let fixture: ComponentFixture<MotorDialogBoxComponent>;
+describe('HealthnewPolicyComponent', () => {
+  let component: HealthnewPolicyComponent;
+  let fixture: ComponentFixture<HealthnewPolicyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MotorDialogBoxComponent ]
+      declarations: [ HealthnewPolicyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MotorDialogBoxComponent);
+    fixture = TestBed.createComponent(HealthnewPolicyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

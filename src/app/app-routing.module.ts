@@ -8,7 +8,7 @@ const routes: Routes = [
     loadChildren: () => import('./app-modules/dashboard/systeminitial.module').then(m => m.SystemInitialModule)
   },
   { path: 'pms', 
-    loadChildren: () => import('./app-modules/policy-management/motor/motor.module').then(m => m.MotorModule) 
+    loadChildren: () => import('./app-modules/policy-management/policymanagement.module').then(m => m.PolicyManagementModule) 
   }, 
   { path: 'subsystem', 
     loadChildren: () => import('./app-modules/sub-system/subsystem.module').then(m => m.SubSystemModule) 

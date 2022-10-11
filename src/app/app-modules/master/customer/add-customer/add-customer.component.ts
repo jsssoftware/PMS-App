@@ -348,7 +348,7 @@ export class AddCustomerComponent implements OnInit, AfterViewInit, ErrorStateMa
           text: response.Message
         }).then((result) => {
           if (result.isConfirmed) {
-            this.router.navigate(['./user/motor/motor-policy-management']);
+            this.router.navigate(['./pms/motor/motor-policy-management']);
           }
         });
       }
