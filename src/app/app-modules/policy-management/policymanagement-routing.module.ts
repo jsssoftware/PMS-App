@@ -1,11 +1,11 @@
 import { NgModule, Component } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from 'src/app/shared/auth-guard/auth.guard';  
-import { HealthnewPolicyManagementComponent } from './healthnew/healthnew-policy-management/healthnew-policy-management.component';
-import { HealthnewPolicyComponent } from './healthnew/healthnew-policy/healthnew-policy.component';
+import { HealthPolicyManagementComponent } from './health/health-policy-management/health-policy-management.component';
+import { HealthPolicyComponent } from './health/health-policy/health-policy.component';
 
-import { MotornewPolicyManagementComponent } from './motornew/motornew-policy-management/motornew-policy-management.component';
-import { MotornewPolicyComponent } from './motornew/motornew-policy/motornew-policy.component';
+import { MotorPolicyManagementComponent } from './motor/motor-policy-management/motor-policy-management.component';
+import { MotorPolicyComponent } from './motor/motor-policy/motor-policy.component';
   
 const routes: Routes = [
   {
@@ -13,29 +13,29 @@ const routes: Routes = [
     children: [ 
       {
         path: 'motor',
-        component: MotornewPolicyComponent,
+        component: MotorPolicyComponent,
       },
       {
         path: 'motor/:id/:policyType',
-        component: MotornewPolicyComponent,
+        component: MotorPolicyComponent,
       },
       {
         path: 'motor/motor-policy-management',
-        component: MotornewPolicyManagementComponent,
+        component: MotorPolicyManagementComponent,
       }, 
     
 
       {
         path: 'health',
-        component: HealthnewPolicyComponent,
+        component: HealthPolicyComponent,
       },
       {
         path: 'health/:id/:policyType',
-        component: HealthnewPolicyComponent,
+        component: HealthPolicyComponent,
       },
       {
         path: 'health/health-policy-management',
-        component: HealthnewPolicyManagementComponent,
+        component: HealthPolicyManagementComponent,
       }
 
     ]

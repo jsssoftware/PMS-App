@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MotornewPolicyComponent } from './motornew-policy.component';
+import { MotorPolicyComponent } from './motor-policy.component';
 
-describe('MotornewPolicyComponent', () => {
-  let component: MotornewPolicyComponent;
-  let fixture: ComponentFixture<MotornewPolicyComponent>;
+describe('MotorPolicyComponent', () => {
+  let component: MotorPolicyComponent;
+  let fixture: ComponentFixture<MotorPolicyComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ MotornewPolicyComponent ]
+      declarations: [ MotorPolicyComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MotornewPolicyComponent);
+    fixture = TestBed.createComponent(MotorPolicyComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

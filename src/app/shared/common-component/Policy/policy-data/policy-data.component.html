@@ -111,13 +111,23 @@
             <hr style="margin-top: 0px;" />
             <input type="hidden" formControlName="customerId" />
             <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field>
+              <div class="col-lg-4" *ngIf="MenuVertical=='Motor'">
+                <mat-form-field >
                   <mat-label>Name in Policy <span style="color:red">*</span></mat-label>
                   <input type="text" matInput formControlName="nameInPolicy" [errorStateMatcher]="matcher"
                     placeholder="Name in Policy">
                   <mat-error *ngIf="customerForm.controls.nameInPolicy">
                     Name in Policy is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field> 
+              </div>
+              <div class="col-lg-4" *ngIf="MenuVertical!='Motor'"> 
+                <mat-form-field>
+                  <mat-label>Proposer Name <span style="color:red">*</span></mat-label>
+                  <input type="text" matInput formControlName="nameInPolicy" [errorStateMatcher]="matcher"
+                    placeholder="Proposer Name">
+                  <mat-error *ngIf="customerForm.controls.nameInPolicy">
+                    Proposer Name is <strong>required</strong>
                   </mat-error>
                 </mat-form-field>
               </div>
@@ -239,7 +249,7 @@
                   <mat-error *ngIf="policyTermForm.controls.policyType">Please Select Policy Type</mat-error>
                 </mat-form-field>
               </div>
-              <div class="col-lg-6">
+              <div class="col-lg-6" *ngIf="MenuVertical=='Motor'">
                 <mat-form-field appearance="fill">
                   <mat-label>Vehicle Class</mat-label>
                   <mat-select formControlName="vehicleClass" required (selectionChange)="getPolicyTerms()">
@@ -251,7 +261,7 @@
                 </mat-form-field>
               </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="MenuVertical=='Motor'">
               <div class="col-lg-6">
                 <mat-form-field appearance="fill">
                   <mat-label>Package Type</mat-label>
@@ -309,14 +319,14 @@
             <div class="row">
               <div class="col-lg-6">
                 <mat-form-field>
-                  <mat-label>Cover Note Number</mat-label>
-                  <input type="text" matInput formControlName="coverNoteNumber" placeholder="Cover Note Number"
+                  <mat-label>{{(MenuVertical=='Motor')? 'Cover Note Number' : 'Proposal Number'}} </mat-label>
+                  <input type="text" matInput formControlName="coverNoteNumber" 
                     [ngStyle]="{'line-height':'30px'}">
                 </mat-form-field>
               </div>
               <div class="col-lg-6">
                 <mat-form-field appearance="fill">
-                  <mat-label>Cover Note Issue Date</mat-label>
+                  <mat-label> {{(MenuVertical=='Motor')?'Cover Note Issue Date' : 'Proposal Date'}}  </mat-label>
                   <input matInput [matDatepicker]="CNIssueDate" formControlName="coverNoteIssueDate">
                   <mat-datepicker-toggle matSuffix [for]="CNIssueDate"></mat-datepicker-toggle>
                   <mat-datepicker #CNIssueDate></mat-datepicker>
@@ -325,23 +335,35 @@
             </div>
             <div class="row">
               <div class="col-lg-12">
-                <h4>TP Policy Details</h4>
+                <h4 *ngIf="MenuVertical=='Motor'">{{(MenuVertical=='Motor')?'TP Policy Details' : 'Policy Details'}}</h4>
               </div>
             </div>
             <hr style="margin-top: 0px;" />
             <div class="row">
               <div class="col-lg-12">
-                <mat-form-field appearance="fill">
-                  <mat-label>TP Insurance Company</mat-label>
-                  <mat-select formControlName="tpInsuranceCompany" required
-                    (selectionChange)="getInsuranceCompanyBranches()">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let insurancecompany of _tpInsuranceCompanies" [value]="insurancecompany.Value">
-                      {{insurancecompany.Name}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="policyForm.controls.tpInsuranceCompany">Please Select TP Insurance Company
+
+                <mat-form-field  appearance="fill">
+                  <mat-label>{{(MenuVertical=='Motor')?'TP Insurance Company' : 'Insurance Company'}}</mat-label>
+                  <input type="text" 
+                        [placeholder]="(MenuVertical=='Motor')?'TP Insurance Company' : 'Insurance Company'" 
+                        aria-label="(MenuVertical=='Motor')?'TP Insurance Company' : 'Insurance Company'" 
+                        matInput 
+                        formControlName="tpInsuranceCompany" 
+                        [matAutocomplete]="autoInsuranceCompany">
+                  <mat-autocomplete 
+                       autoActiveFirstOption 
+                       #autoInsuranceCompany="matAutocomplete"
+                      [displayWith]="getInsuranceCompanyName.bind(this)" >
+                    <mat-option *ngFor="let insuranceCompany of _filteredInsuranceCompaniesOptions"
+                                [value]="insuranceCompany.Value">
+                            {{insuranceCompany.Name}}
+                    </mat-option>
+                  </mat-autocomplete>
+
+                  <mat-error style="padding-right: 0px; margin-left: 0px;">{{(MenuVertical=='Motor')?'Please Select TP Insurance Company' : 'Please Select Insurance Company'}}
                   </mat-error>
-                </mat-form-field>
+              </mat-form-field> 
+                 
               </div>
             </div>
             <div class="row">
@@ -359,7 +381,7 @@
             <div class="row">
               <div class="col-lg-4">
                 <mat-form-field appearance="fill">
-                  <mat-label>TP Start Date</mat-label>
+                  <mat-label>{{(MenuVertical=='Motor')?'TP Start Date' : 'Risk Start Date'}}</mat-label>
                   <input matInput [matDatepicker]="StartDate" formControlName="tpStartDate"
                     (dateChange)="setExpiryDate('tp')">
                   <mat-datepicker-toggle matSuffix [for]="StartDate"></mat-datepicker-toggle>
@@ -379,7 +401,7 @@
               </div>
               <div class="col-lg-4">
                 <mat-form-field appearance="fill">
-                  <mat-label>Expiry Date</mat-label>
+                  <mat-label>{{(MenuVertical=='Motor')?'Expiry Date' : 'Risk End Date'}}</mat-label>
                   <input matInput [matDatepicker]="ExpiryDate" formControlName="tpExpiryDate" [readonly]="true" />
                   <mat-datepicker-toggle matSuffix [for]="ExpiryDate" [disabled]="true"></mat-datepicker-toggle>
                   <mat-datepicker #ExpiryDate></mat-datepicker>
@@ -395,17 +417,31 @@
               <hr style="margin-top: 0px;" />
               <div class="row">
                 <div class="col-lg-12">
-                  <mat-form-field appearance="fill">
+
+
+                  <mat-form-field  appearance="fill">
                     <mat-label>OD Insurance Company</mat-label>
-                    <mat-select formControlName="odInsuranceCompany" required [disabled]="_isDisableOdPolicyDetails"
-                      (selectionChange)="getInsuranceCompanyBranches()">
-                      <mat-option>Select</mat-option>
-                      <mat-option *ngFor="let insurancecompany of _odInsuranceCompanies" [value]="insurancecompany.Value">
-                        {{insurancecompany.Name}}</mat-option>
-                    </mat-select>
-                    <mat-error *ngIf="policyForm.controls.odInsuranceCompany">Please choose OD Insurance Company
-                    </mat-error>
-                  </mat-form-field>
+                    <input type="text" 
+                          placeholder="OD Insurance Company" 
+                          aria-label="OD Insurance Company" 
+                          matInput 
+                          required
+                          [disabled]="_isDisableOdPolicyDetails"
+                          formControlName="odInsuranceCompany" 
+                          [matAutocomplete]="autoInsuranceCompanyOd">
+                    <mat-autocomplete 
+                         autoActiveFirstOption 
+                         #autoInsuranceCompanyOd="matAutocomplete"
+                        [displayWith]="getInsuranceCompanyOd.bind(this)" >
+                      <mat-option *ngFor="let insuranceCompany of _filteredInsuranceCompaniesOdOptions"
+                                  [value]="insuranceCompany.Value">
+                              {{insuranceCompany.Name}}
+                      </mat-option>
+                    </mat-autocomplete>
+  
+                    <mat-error *ngIf="policyForm.controls.lastYearInsuranceCompany">Please choose OD Insurance Company</mat-error>  
+                  </mat-form-field>  
+                  
                 </div>
               </div>
               <div class="row">
@@ -445,7 +481,7 @@
                 </div>
                 <div class="col-lg-4">
                   <mat-form-field appearance="fill">
-                    <mat-label>Expiry Date</mat-label>
+                    <mat-label>{{(MenuVertical=='Motor')?'Expiry Date' : 'End Date'}}</mat-label>
                     <input matInput [matDatepicker]="ExpiryDate2" formControlName="odExpiryDate" [readonly]="true">
                     <mat-datepicker-toggle matSuffix [for]="ExpiryDate2" [disabled]="true"></mat-datepicker-toggle>
                     <mat-datepicker #ExpiryDate2></mat-datepicker>
@@ -478,7 +514,7 @@
                 </div>
               </div>
             </div>
-            <div class="row">
+            <div class="row" *ngIf="MenuVertical=='Motor'">
               <div class="col-lg-6">
                 <mat-form-field>
                   <mat-label>Number of KiloMeter Covered</mat-label>
@@ -494,7 +530,7 @@
               </div>
             </div>
             <div class="row">
-              <div class="col-lg-4">
+              <div class="col-lg-4" *ngIf="MenuVertical=='Motor'">
                 <mat-form-field appearance="fill">
                   <mat-label>Finance By</mat-label>
                   <mat-select formControlName="financeBy" required>
@@ -530,33 +566,46 @@
               <hr style="margin-top: 0px;" />
               <div class="row">
                 <div class="col-lg-12">
-                  <mat-form-field appearance="fill">
+
+                  <mat-form-field  appearance="fill">
                     <mat-label>Last Year Insurance Company</mat-label>
-                    <mat-select formControlName="lastYearInsuranceCompany" required [disabled]="_disableFields">
-                      <mat-option>Select</mat-option>
-                      <mat-option *ngFor="let insurancecompany of _lastInsuranceCompanies"
-                        [value]="insurancecompany.Value">
-                        {{insurancecompany.Name}}</mat-option>
-                    </mat-select>
+                    <input type="text" 
+                          placeholder="Last Year Insurance Company" 
+                          aria-label="Last Year Insurance Company" 
+                          matInput 
+                          required
+                          [disabled]="_disableFields"
+                          formControlName="lastYearInsuranceCompany" 
+                          [matAutocomplete]="autoInsuranceCompanyLastYear">
+                    <mat-autocomplete 
+                         autoActiveFirstOption 
+                         #autoInsuranceCompanyLastYear="matAutocomplete"
+                        [displayWith]="getInsuranceCompanyLastName.bind(this)" >
+                      <mat-option *ngFor="let insuranceCompany of _filteredInsuranceCompaniesLastOptions"
+                                  [value]="insuranceCompany.Value">
+                              {{insuranceCompany.Name}}
+                      </mat-option>
+                    </mat-autocomplete>
+  
                     <mat-error *ngIf="policyForm.controls.lastYearInsuranceCompany">Please choose Last
-                      Year Insurance Company</mat-error>
-                  </mat-form-field>
+                      Year Insurance Company</mat-error>  
+                </mat-form-field> 
                 </div>
               </div>
               <div class="row">
                 <div class="col-lg-6">
                   <mat-form-field>
-                    <mat-label>Previous CN / Policy Number <span style="color:red">*</span></mat-label>
+                    <mat-label> {{(MenuVertical=='Motor')?'Previous CN / Policy Number' : 'Previous Policy Number'}}  <span style="color:red">*</span></mat-label>
                     <input type="text" matInput formControlName="previousCnPolicyNumber" [errorStateMatcher]="matcher"
-                      placeholder="Previous CN / Policy Number" style="line-height: 30px;" [readonly]="_disableFields">
+                      [placeholder]="(MenuVertical=='Motor')?'Previous CN / Policy Number' : 'Previous Policy Number'" style="line-height: 30px;" [readonly]="_disableFields">
                     <mat-error *ngIf="policyForm.controls.previousCNPolicyNumber">
-                      Previous CN / Policy Number is <strong>required</strong>
+                      {{(MenuVertical=='Motor')?'Previous CN / Policy Number ' : 'Previous Policy Number '}} <strong>is required</strong> 
                     </mat-error>
                   </mat-form-field>
                 </div>
                 <div class="col-lg-6">
                   <mat-form-field appearance="fill">
-                    <mat-label>Last Policy Expiry Date</mat-label>
+                    <mat-label> {{(MenuVertical=='Motor')?'Last Policy Expiry Date' : 'Previous Policy End Date'}}    </mat-label>
                     <input matInput [matDatepicker]="LastPolicyExpiryDate" formControlName="lastPolicyExpiryDate"
                       [disabled]="_disableFields">
                     <mat-datepicker-toggle matSuffix [for]="LastPolicyExpiryDate" [disabled]="_disableFields">
@@ -571,248 +620,250 @@
         <!--End Policy Details-->
   
         <!--Start Vehicle Details-->
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Vehicle Details
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <form [formGroup]="vehicleForm" autocomplete="off">
-            <hr style="margin-top: 0px;" />
-  
-            <div class="row">
-              <div class="col-lg-12">
-                <mat-form-field appearance="fill">
-                  <mat-label>Vehicle</mat-label>
-                  <input type="text" placeholder="Select Vehicle" aria-label="Vehicle" matInput formControlName="vehicle"
-                    [matAutocomplete]="auto">
-                  <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
-                    (optionSelected)="setCompleteVehicleDetails($event)">
-                    <mat-option *ngFor="let vehicle of _filteredOptions" [value]="vehicle">
-                      {{vehicle.Name}}
-                    </mat-option>
-                  </mat-autocomplete>
-                  <mat-error *ngIf="vehicleForm.controls.vehicle">Please Select Vehicle
-                  </mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Manufacturer</mat-label>
-                  <mat-select formControlName="manufacturer" required (selectionChange)="getModels($event.value)">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let manufacturer of _manufacturers" [value]="manufacturer.Value">
-                      {{manufacturer.Name}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.manufacturer">Please Select Manufacturer</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Model</mat-label>
-                  <mat-select formControlName="model" required (selectionChange)="getVarients()">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let model of _models" [value]="model.Value">{{model.Name}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.model">Please Select Model</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Varient</mat-label>
-                  <mat-select formControlName="varient" required (selectionChange)="setVehicleDetails($event.value)">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let varient of _varients" [value]="varient">{{varient.VarientName}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.varient">Please Select Varient</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Fuel Type</mat-label>
-                  <input type="text" matInput formControlName="fuelType" placeholder="Fuel Type" [readonly]="true">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>C.C.</mat-label>
-                  <input type="text" matInput formControlName="cc" placeholder="C.C." [readonly]="true">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Seating</mat-label>
-                  <input type="text" matInput formControlName="seating" placeholder="Seating" [readonly]="true">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>GVW</mat-label>
-                  <input type="text" matInput formControlName="gvw" placeholder="Please Enter GVW" [readonly]="true">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>KW</mat-label>
-                  <input type="text" matInput formControlName="kw" placeholder="Please Enter KW" [readonly]="true">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Ex-Show Room Value</mat-label>
-                  <input type="text" matInput formControlName="exShowRoomValue"
-                    placeholder="Please Enter Ex-Show Room Value">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Registration Number</mat-label>
-                  <input type="text" matInput formControlName="registrationNumber" (keyup)="findRtoZone($event)"
-                    placeholder="Please Registration Number">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Engine Number <span style="color:red">*</span></mat-label>
-                  <input type="text" matInput formControlName="engineNumber" placeholder="Please Enter Engine Number"
-                    maxlength="17">
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Chassis Number <span style="color:red">*</span></mat-label>
-                  <input type="text" matInput formControlName="chassisNumber" placeholder="Please Enter Chassis Number"
-                    maxlength="17">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <mat-checkbox style="margin-top: 15px;" color="primary" formControlName="isSpecialRegistrationNumber">
-                  Special Registration Number / New Vehicle
-                </mat-checkbox>
-              </div>
-              <div class="col-lg-6">
-                <mat-form-field>
-                  <mat-label>Vehicle Segment</mat-label>
-                  <input type="text" matInput formControlName="vehicleSegment">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <mat-form-field appearance="fill">
-                  <mat-label>RTO Zone</mat-label>
-                  <mat-select formControlName="rtoZone" required
-                    [disabled]="!vehicleForm.value.isSpecialRegistrationNumber"
-                    (selectionChange)="setRiskZone($event.value)">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let rtoZone of _rtoZones" [value]="rtoZone">{{rtoZone.Name}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.rtoZone">Please Select RTO Zone</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-6">
-                <mat-form-field>
-                  <mat-label>Risk Zone</mat-label>
-                  <input type="text" matInput formControlName="riskZone" placeholder="Risk Zone"
-                    style="line-height: 28px;">
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Make Year</mat-label>
-                  <mat-select formControlName="makeYear" required>
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let makeyear of _makeYears" [value]="makeyear.Value">{{makeyear.Name}}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.makeYear">Please Select Make Year</mat-error>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Date of Registration</mat-label>
-                  <input matInput [matDatepicker]="DateofRegistration" formControlName="dateOfRegistration">
-                  <mat-datepicker-toggle matSuffix [for]="DateofRegistration"></mat-datepicker-toggle>
-                  <mat-datepicker #DateofRegistration></mat-datepicker>
-                </mat-form-field>
-              </div>
-              <div class="col-lg-4"
-                *ngIf="policyTermForm.value.vehicleClass == 2 || policyTermForm.value.vehicleClass == 3">
-                <mat-form-field appearance="fill">
-                  <mat-label>Usage</mat-label>
-                  <mat-select formControlName="usage" required>
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let usage of _usages" [value]="usage.Value">{{usage.Name}}</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="vehicleForm.controls.usage">Please Select Usage</mat-error>
-                </mat-form-field>
-              </div>
-            </div>
-  
-            <section *ngIf="_type != 1">
+        <div *ngIf="MenuVertical=='Motor'">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Vehicle Details
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="vehicleForm" autocomplete="off">
+              <hr style="margin-top: 0px;" />
+    
               <div class="row">
                 <div class="col-lg-12">
-                  <h4>Inspection Details</h4>
+                  <mat-form-field appearance="fill">
+                    <mat-label>Vehicle</mat-label>
+                    <input type="text" placeholder="Select Vehicle" aria-label="Vehicle" matInput formControlName="vehicle"
+                      [matAutocomplete]="auto">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete"
+                      (optionSelected)="setCompleteVehicleDetails($event)">
+                      <mat-option *ngFor="let vehicle of _filteredOptions" [value]="vehicle">
+                        {{vehicle.Name}}
+                      </mat-option>
+                    </mat-autocomplete>
+                    <mat-error *ngIf="vehicleForm.controls.vehicle">Please Select Vehicle
+                    </mat-error>
+                  </mat-form-field>
                 </div>
               </div>
-              <hr style="margin-top: 0px;" />
-              <div class="row" *ngIf="_inspections.length > 0; else elseBlockNoInspections;">
-                <table mat-table [dataSource]="_inspections" style="width: 100%;">
-                  <ng-container matColumnDef="dateString">
-                    <th mat-header-cell *matHeaderCellDef>Date</th>
-                    <td mat-cell *matCellDef="let element">{{element.DateString}}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="reason">
-                    <th mat-header-cell *matHeaderCellDef>Reason</th>
-                    <td mat-cell *matCellDef="let element">{{element.Reason}}</td>
-                  </ng-container>
-                  <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef> Status </th>
-                    <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="subStatus">
-                    <th mat-header-cell *matHeaderCellDef> Sub-Status </th>
-                    <td mat-cell *matCellDef="let element"> {{element.SubStatus}} </td>
-                  </ng-container>
-                  <ng-container matColumnDef="action">
-                    <th mat-header-cell *matHeaderCellDef style="text-align: end;"> Action </th>
-                    <td class="handOnHover" mat-cell *matCellDef="let element">
-                      <div class="row" style="justify-content: flex-end">
-                        <div class="">
-                          <button type="button" mat-icon-button (click)="openInspectionDialog(element)">
-                            <mat-icon>visibility</mat-icon>
-                          </button>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Manufacturer</mat-label>
+                    <mat-select formControlName="manufacturer" required (selectionChange)="getModels($event.value)">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let manufacturer of _manufacturers" [value]="manufacturer.Value">
+                        {{manufacturer.Name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.manufacturer">Please Select Manufacturer</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Model</mat-label>
+                    <mat-select formControlName="model" required (selectionChange)="getVarients()">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let model of _models" [value]="model.Value">{{model.Name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.model">Please Select Model</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Varient</mat-label>
+                    <mat-select formControlName="varient" required (selectionChange)="setVehicleDetails($event.value)">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let varient of _varients" [value]="varient">{{varient.VarientName}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.varient">Please Select Varient</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Fuel Type</mat-label>
+                    <input type="text" matInput formControlName="fuelType" placeholder="Fuel Type" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>C.C.</mat-label>
+                    <input type="text" matInput formControlName="cc" placeholder="C.C." [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Seating</mat-label>
+                    <input type="text" matInput formControlName="seating" placeholder="Seating" [readonly]="true">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>GVW</mat-label>
+                    <input type="text" matInput formControlName="gvw" placeholder="Please Enter GVW" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>KW</mat-label>
+                    <input type="text" matInput formControlName="kw" placeholder="Please Enter KW" [readonly]="true">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Ex-Show Room Value</mat-label>
+                    <input type="text" matInput formControlName="exShowRoomValue"
+                      placeholder="Please Enter Ex-Show Room Value">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Registration Number</mat-label>
+                    <input type="text" matInput formControlName="registrationNumber" (keyup)="findRtoZone($event)"
+                      placeholder="Please Registration Number">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Engine Number <span style="color:red">*</span></mat-label>
+                    <input type="text" matInput formControlName="engineNumber" placeholder="Please Enter Engine Number"
+                      maxlength="17">
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Chassis Number <span style="color:red">*</span></mat-label>
+                    <input type="text" matInput formControlName="chassisNumber" placeholder="Please Enter Chassis Number"
+                      maxlength="17">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-checkbox style="margin-top: 15px;" color="primary" formControlName="isSpecialRegistrationNumber">
+                    Special Registration Number / New Vehicle
+                  </mat-checkbox>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field>
+                    <mat-label>Vehicle Segment</mat-label>
+                    <input type="text" matInput formControlName="vehicleSegment">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-6">
+                  <mat-form-field appearance="fill">
+                    <mat-label>RTO Zone</mat-label>
+                    <mat-select formControlName="rtoZone" required
+                      [disabled]="!vehicleForm.value.isSpecialRegistrationNumber"
+                      (selectionChange)="setRiskZone($event.value)">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let rtoZone of _rtoZones" [value]="rtoZone">{{rtoZone.Name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.rtoZone">Please Select RTO Zone</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-6">
+                  <mat-form-field>
+                    <mat-label>Risk Zone</mat-label>
+                    <input type="text" matInput formControlName="riskZone" placeholder="Risk Zone"
+                      style="line-height: 28px;">
+                  </mat-form-field>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Make Year</mat-label>
+                    <mat-select formControlName="makeYear" required>
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let makeyear of _makeYears" [value]="makeyear.Value">{{makeyear.Name}}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.makeYear">Please Select Make Year</mat-error>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Date of Registration</mat-label>
+                    <input matInput [matDatepicker]="DateofRegistration" formControlName="dateOfRegistration">
+                    <mat-datepicker-toggle matSuffix [for]="DateofRegistration"></mat-datepicker-toggle>
+                    <mat-datepicker #DateofRegistration></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4"
+                  *ngIf="policyTermForm.value.vehicleClass == 2 || policyTermForm.value.vehicleClass == 3">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Usage</mat-label>
+                    <mat-select formControlName="usage" required>
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let usage of _usages" [value]="usage.Value">{{usage.Name}}</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="vehicleForm.controls.usage">Please Select Usage</mat-error>
+                  </mat-form-field>
+                </div>
+              </div>
+    
+              <section *ngIf="_type != 1">
+                <div class="row">
+                  <div class="col-lg-12">
+                    <h4>Inspection Details</h4>
+                  </div>
+                </div>
+                <hr style="margin-top: 0px;" />
+                <div class="row" *ngIf="_inspections.length > 0; else elseBlockNoInspections;">
+                  <table mat-table [dataSource]="_inspections" style="width: 100%;">
+                    <ng-container matColumnDef="dateString">
+                      <th mat-header-cell *matHeaderCellDef>Date</th>
+                      <td mat-cell *matCellDef="let element">{{element.DateString}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="reason">
+                      <th mat-header-cell *matHeaderCellDef>Reason</th>
+                      <td mat-cell *matCellDef="let element">{{element.Reason}}</td>
+                    </ng-container>
+                    <ng-container matColumnDef="status">
+                      <th mat-header-cell *matHeaderCellDef> Status </th>
+                      <td mat-cell *matCellDef="let element"> {{element.Status}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="subStatus">
+                      <th mat-header-cell *matHeaderCellDef> Sub-Status </th>
+                      <td mat-cell *matCellDef="let element"> {{element.SubStatus}} </td>
+                    </ng-container>
+                    <ng-container matColumnDef="action">
+                      <th mat-header-cell *matHeaderCellDef style="text-align: end;"> Action </th>
+                      <td class="handOnHover" mat-cell *matCellDef="let element">
+                        <div class="row" style="justify-content: flex-end">
+                          <div class="">
+                            <button type="button" mat-icon-button (click)="openInspectionDialog(element)">
+                              <mat-icon>visibility</mat-icon>
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </td>
-                  </ng-container>
-                  <tr mat-header-row *matHeaderRowDef="_displayedColumnsInspections"></tr>
-                  <tr mat-row *matRowDef="let row; columns: _displayedColumnsInspections;"></tr>
-                </table>
-              </div>
-              <ng-template #elseBlockNoInspections>
-                <div class="alert alert-danger" role="alert">
-                  There is no any inspections.
+                      </td>
+                    </ng-container>
+                    <tr mat-header-row *matHeaderRowDef="_displayedColumnsInspections"></tr>
+                    <tr mat-row *matRowDef="let row; columns: _displayedColumnsInspections;"></tr>
+                  </table>
                 </div>
-              </ng-template>
-            </section>
-  
-          </form>
-        </mat-expansion-panel>
+                <ng-template #elseBlockNoInspections>
+                  <div class="alert alert-danger" role="alert">
+                    There is no any inspections.
+                  </div>
+                </ng-template>
+              </section>
+    
+            </form>
+          </mat-expansion-panel> 
+        </div>
         <!--End Vehchile Details-->
-  
+
         <!--Start Premium Details-->
         <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
           <mat-expansion-panel-header>
@@ -1094,49 +1145,51 @@
         <!--End Add-On Rider Details-->
   
         <!--Start Nomination Details-->
-        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-          <mat-expansion-panel-header>
-            <mat-panel-title>
-              Nomination Details
-            </mat-panel-title>
-          </mat-expansion-panel-header>
-          <form [formGroup]="nominationForm">
-            <hr style="margin-top: 0px;" />
-            <div class="row">
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Nomination Name</mat-label>
-                  <input type="text" matInput formControlName="nominationName" placeholder="Nomination Name"
-                    style="line-height: 28px;" />
-                </mat-form-field>
+        <div *ngIf="MenuVertical=='Motor'">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Nomination Details
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="nominationForm">
+              <hr style="margin-top: 0px;" />
+              <div class="row">
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Nomination Name</mat-label>
+                    <input type="text" matInput formControlName="nominationName" placeholder="Nomination Name"
+                      style="line-height: 28px;" />
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Relation</mat-label>
+                    <mat-select formControlName="relation">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let relation of _relations" [value]="relation.Value">{{relation.Name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+                <div class="col-lg-4">
+                  <mat-form-field>
+                    <mat-label>Age</mat-label>
+                    <input type="text" matInput formControlName="age" placeholder="Age" style="line-height: 28px;" />
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-lg-4">
-                <mat-form-field appearance="fill">
-                  <mat-label>Relation</mat-label>
-                  <mat-select formControlName="relation">
-                    <mat-option>Select</mat-option>
-                    <mat-option *ngFor="let relation of _relations" [value]="relation.Value">{{relation.Name}}
-                    </mat-option>
-                  </mat-select>
-                </mat-form-field>
+              <div class="row">
+                <div class="col-lg-12">
+                  <mat-form-field>
+                    <mat-label>If Minor then Guardian Name</mat-label>
+                    <input type="text" matInput formControlName="guardianName" placeholder="Please Enter Guardian Name" />
+                  </mat-form-field>
+                </div>
               </div>
-              <div class="col-lg-4">
-                <mat-form-field>
-                  <mat-label>Age</mat-label>
-                  <input type="text" matInput formControlName="age" placeholder="Age" style="line-height: 28px;" />
-                </mat-form-field>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-12">
-                <mat-form-field>
-                  <mat-label>If Minor then Guardian Name</mat-label>
-                  <input type="text" matInput formControlName="guardianName" placeholder="Please Enter Guardian Name" />
-                </mat-form-field>
-              </div>
-            </div>
-          </form>
-        </mat-expansion-panel>
+            </form>
+          </mat-expansion-panel>
+        </div>
         <!--End Nomination Details-->
   
         <!--Start Policy Source-->

@@ -211,7 +211,10 @@ export class SearchPolicyComponent implements OnInit {
   }
 
   routeToMotorPolicy(policyId: number) {
-    this.router.navigate(["/pms/motor", { policyId, policyTypeId: this._policyTypeId }]);
+    if(this._verticalTypeId==Vertical.Motor)
+      this.router.navigate(["/pms/motor", { policyId, policyTypeId: this._policyTypeId }]);
+    if(this._verticalTypeId==Vertical.Health)
+      this.router.navigate(["/pms/health", { policyId, policyTypeId: this._policyTypeId }]);
   }
 
   searchPolicy(): void {
@@ -377,6 +380,10 @@ export class SearchPolicyComponent implements OnInit {
   }
 
   backToMaster(){
+    if(this._verticalTypeId==Vertical.Motor)
       this.router.navigate(['./pms/motor/motor-policy-management']);
+    if(this._verticalTypeId==Vertical.Health)
+      this.router.navigate(['./pms/health/health-policy-management']);
+
   }  
 }  

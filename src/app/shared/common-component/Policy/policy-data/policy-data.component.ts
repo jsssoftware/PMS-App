@@ -404,13 +404,16 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
 
   public _isDisableOdPolicyDetails: boolean = false;
   public _policyData?: IMotorPolicyFormDataModel;
-  public _verticalName: string;
-  public _policyStatus: string;
-  public _policyStatusColor: string;
+  public _verticalName: string="";
+  public _policyStatus: string="";
+  public _policyStatusColor: string="";
   public _posManagedBy?: IDropDownDto<number>;
   public _verticalDetail: any;
   public _policyDocuments: IPolicyDocumentDto[] = [];
-
+  public _filteredInsuranceCompaniesOptions: IDropDownDto<number>[] = [];
+  public _filteredInsuranceCompaniesLastOptions: IDropDownDto<number>[] = [];
+  public _filteredInsuranceCompaniesOdOptions: IDropDownDto<number>[] = [];
+  
   //#endregion
 
   constructor(
@@ -427,10 +430,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     this._addOnRiderModel = {
       AddOnRiderId: 0,
       AddOnRiderOptionId: []
-    };
-    this._verticalName = this._policyData != undefined ? this._policyData.Vertical : "MOTOR";
-    this._policyStatus = this._policyData != undefined ? this._policyData.PolicyStatus : "Active";
-    this._policyStatusColor = this._policyData != undefined ? this._policyData.PolicyStatusColor : '#fdcb6e'
+    };    
   }
 
   ngAfterViewInit(): void {
@@ -477,6 +477,37 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
         this.getPolicyDocuments();
         break;
     }
+
+    this.policyForm.get("tpInsuranceCompany")?.valueChanges.subscribe(input => {
+      if (input == null || input === undefined || input === '')
+        return;
+
+      if (typeof (input) == "string")
+        this.filterInsurancerCompaniesData(input);
+      else
+        this.filterInsurancerCompaniesData(input.Name);
+    });
+
+    this.policyForm.get("lastYearInsuranceCompany")?.valueChanges.subscribe(input => {
+      if (input == null || input === undefined || input === '')
+        return;
+
+      if (typeof (input) == "string")
+        this.filterInsurancerCompaniesLastData(input);
+      else
+        this.filterInsurancerCompaniesLastData(input.Name);
+    });
+
+    this.policyForm.get("odInsuranceCompany")?.valueChanges.subscribe(input => {
+      if (input == null || input === undefined || input === '')
+        return;
+
+      if (typeof (input) == "string")
+        this.filterInsurancerCompaniesOdData(input);
+      else
+        this.filterInsurancerCompaniesOdData(input.Name);
+    });
+
   }
 
   ngOnInit(): void {
@@ -522,6 +553,12 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     this.policyForm.get("extendedKiloMeterCovered")?.disable();
   }
 
+  setvalues(){
+     
+    this._verticalName = this._policyData != undefined ? this._policyData.Vertical : "MOTOR";
+    this._policyStatus = this._policyData != undefined ? this._policyData.PolicyStatus : "Active";
+    this._policyStatusColor = this._policyData != undefined ? this._policyData.PolicyStatusColor : '#fdcb6e'
+  }
   filterData(input: any) {
     this._filteredOptions = this._vehicles.filter(item => {
       return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
@@ -546,7 +583,8 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   }
 
   getPolicyTypes(): any {
-    this.commonService.getPolicyTypes(this._type).subscribe((response: any) => {
+     
+    this.commonService.getPolicyTypes(this._type).subscribe((response: any) => { 
       this._policyTypes = response;
     });
   }
@@ -944,36 +982,38 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   }
 
   setCompleteVehicleDetails(vehicle: MatAutocompleteSelectedEvent): void {
-
     this.getSetCompleteVehicleDetails(<IDropDownDto<number>>{
       Name: vehicle.option.value.Name,
       Value: vehicle.option.value.Value
     });
   }
 
-  getSetCompleteVehicleDetails(value: IDropDownDto<number>) {
-    this.vehicleForm.patchValue({ vehicle: value.Name });
-    this.commonService.getVehicleDetails(value.Value).subscribe((response: IVehicleDto) => {
-      this.commonService.getModels(response.ManufacturerId).subscribe((modelResponse: IDropDownDto<number>[]) => {
-        this._models = modelResponse;
-        let vehicleClassId = this._policyTypeId === "2" ? this._policyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
-        this.commonService.getVarients(response.ManufacturerId, response.ModelId, vehicleClassId).subscribe((varientResponse: IVarientDto[]) => {
-          this._varients = varientResponse;
-          let varient: IVarientDto = varientResponse.filter(f => f.VarientId == response.VarientId)[0];
-          this.vehicleForm.patchValue({
-            manufacturer: response.ManufacturerId,
-            model: response.ModelId,
-            varient: varient,
-            fuelType: response.FuelType,
-            cc: response.CubicCapacity,
-            seating: response.SeatCapacity,
-            gvw: response.Gvw,
-            kw: response.Kw,
-            exShowRoomValue: response.ExShowroomValue
+  getSetCompleteVehicleDetails(value: IDropDownDto<number>) { 
+    if(value!=undefined)
+    {
+      this.vehicleForm.patchValue({ vehicle: value.Name });
+      this.commonService.getVehicleDetails(value.Value).subscribe((response: IVehicleDto) => {
+        this.commonService.getModels(response.ManufacturerId).subscribe((modelResponse: IDropDownDto<number>[]) => {
+          this._models = modelResponse;
+          let vehicleClassId = this._policyTypeId === "2" ? this._policyData?.PolicyTerm.VehicleClass : this.policyTermForm.value.vehicleClass;
+          this.commonService.getVarients(response.ManufacturerId, response.ModelId, vehicleClassId).subscribe((varientResponse: IVarientDto[]) => {
+            this._varients = varientResponse;
+            let varient: IVarientDto = varientResponse.filter(f => f.VarientId == response.VarientId)[0];
+            this.vehicleForm.patchValue({
+              manufacturer: response.ManufacturerId,
+              model: response.ModelId,
+              varient: varient,
+              fuelType: response.FuelType,
+              cc: response.CubicCapacity,
+              seating: response.SeatCapacity,
+              gvw: response.Gvw,
+              kw: response.Kw,
+              exShowRoomValue: response.ExShowroomValue
+            });
           });
         });
-      });
-    });
+      }); 
+    } 
   }
 
   createPolicy(): any {
@@ -1137,7 +1177,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       VerticalSegmentId: this._verticalDetail.VerticalSegmentId
     }
 
-    console.log(model);
+     
     this.motorService.createPolicy(model).subscribe((response: ICommonDto<any>) => {
 
       if (response.IsSuccess) {
@@ -1685,7 +1725,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
 
   getMotorPolicyById(policyId: number) {
     this.motorService.getMotorPolicyById(policyId).subscribe((response: IMotorPolicyFormDataModel) => {
-      console.log(response,"response");
+       
       this._policyData = response;
       this.setMotorPolicyData(response);
     });
@@ -1875,6 +1915,8 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
         });
       }
     }
+
+    this.setvalues();  
   }
 
   getTotalCost() {
@@ -1898,8 +1940,8 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
 
     let fosNameId: any = this.policySourceForm.controls.fosName.value;
     let posNameId: any = this.policySourceForm.controls.posName.value;
-    console.log("fosNameId: ", fosNameId);
-    console.log("posNameId: ", posNameId);
+     
+     
 
     if (fosNameId > 0 && posNameId > 0) {
       this.policySourceForm.patchValue({
@@ -2373,4 +2415,43 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       this._dataSourceUploadDocuments = new MatTableDataSource<IPolicyDocumentDto>(this._policyDocuments);
     });
   }
+
+  getInsuranceCompanyName(value: number): string {
+    return value ? this._insuranceCompanies.filter(f => f.Value == value)[0].Name : '';
+  }
+
+  getInsuranceCompanyLastName(value: number): string { 
+    return value ? this._lastInsuranceCompanies.filter(f => f.Value == value)[0].Name : '';
+  }
+
+  getInsuranceCompanyOd(value: number): string { 
+    return value ? this._odInsuranceCompanies.filter(f => f.Value == value)[0].Name : '';
+  }
+
+
+  filterInsurancerCompaniesData(input: any) {
+    if (input === undefined)
+      return;
+    this._filteredInsuranceCompaniesOptions = this._insuranceCompanies.filter(item => {
+      return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+
+  filterInsurancerCompaniesLastData(input: any) {
+    if (input === undefined)
+      return;
+    this._filteredInsuranceCompaniesLastOptions = this._lastInsuranceCompanies.filter(item => {
+      return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+
+  filterInsurancerCompaniesOdData(input: any) {
+    if (input === undefined)
+      return;
+    this._filteredInsuranceCompaniesOdOptions = this._odInsuranceCompanies.filter(item => {
+      return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+ 
 }
+

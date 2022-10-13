@@ -10,10 +10,10 @@ import { VoucherDetailComponent } from 'src/app/shared/common-component/Policy/d
 import { DialogBoxComponent } from 'src/app/shared/common-component/Policy/dialog-box/dialog-box.component';
 import { PolicyDataComponent } from 'src/app/shared/common-component/Policy/policy-data/policy-data.component';
 import { PolicyManagementComponent } from 'src/app/shared/common-component/Policy/policy-management/policy-management.component'; 
-import { MotornewPolicyManagementComponent } from './motornew/motornew-policy-management/motornew-policy-management.component';
-import { HealthnewPolicyComponent } from './healthnew/healthnew-policy/healthnew-policy.component';
-import { HealthnewPolicyManagementComponent } from './healthnew/healthnew-policy-management/healthnew-policy-management.component';
-import { MotornewPolicyComponent } from './motornew/motornew-policy/motornew-policy.component';
+import { MotorPolicyManagementComponent } from './motor/motor-policy-management/motor-policy-management.component';
+import { HealthPolicyComponent } from './health/health-policy/health-policy.component';
+import { HealthPolicyManagementComponent } from './health/health-policy-management/health-policy-management.component';
+import { MotorPolicyComponent } from './motor/motor-policy/motor-policy.component';
    
 @NgModule({
   declarations: [  
@@ -24,10 +24,11 @@ import { MotornewPolicyComponent } from './motornew/motornew-policy/motornew-pol
     PolicyDataComponent,
     PolicyManagementComponent,
     
-    MotornewPolicyComponent,
-    MotornewPolicyManagementComponent,
-    HealthnewPolicyComponent,
-    HealthnewPolicyManagementComponent
+    MotorPolicyComponent,
+    MotorPolicyManagementComponent,
+    HealthPolicyComponent,
+    HealthPolicyManagementComponent,
+
   ],
   imports: [
     CommonModule,
