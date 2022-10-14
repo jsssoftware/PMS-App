@@ -214,6 +214,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     // inspectionDate: new FormControl(''),
     // inspectionTime: new FormControl(''),
     // inspectionRemarks: new FormControl('')
+    portability: new FormControl('', [Validators.required])
   });
   //#endregion
 
@@ -430,6 +431,8 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   public _plans: IDropDownDto<number>[] = [];
   public _planTypes: IDropDownDto<number>[] = [];
   public _selectedProductId:number= 0;
+  public _portability: IDropDownDto<number>[] = [];
+
   
   //#endregion
 
@@ -478,7 +481,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     this.getProduct();
     this.getPlan();
     this.getPlanType();
-
+    this.getPortability();
     switch (this._policyTypeId) {
       case "1":
       case "8":
@@ -2535,6 +2538,12 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   getPlanType(){
     this.commonService.getPlanType().subscribe((response: any) => {
       this._planTypes = response;
+    });
+  }
+
+  getPortability(){
+    this.commonService.getPortability().subscribe((response: any) => {
+      this._portability = response;
     });
   }
  

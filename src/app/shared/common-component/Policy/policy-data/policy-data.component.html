@@ -340,8 +340,7 @@
             </div>
             <hr style="margin-top: 0px;" />
             <div class="row">
-              <div class="col-lg-12">
-
+              <div class="col-lg-8"> 
                 <mat-form-field  appearance="fill">
                   <mat-label>{{(MenuVertical=='Motor')?'TP Insurance Company' : 'Insurance Company'}}</mat-label>
                   <input type="text" 
@@ -362,9 +361,21 @@
 
                   <mat-error style="padding-right: 0px; margin-left: 0px;">{{(MenuVertical=='Motor')?'Please Select TP Insurance Company' : 'Please Select Insurance Company'}}
                   </mat-error>
-              </mat-form-field> 
-                 
+              </mat-form-field>  
               </div>
+              <div class="col-lg-4" *ngIf="MenuVertical!='Motor'">
+                <mat-form-field appearance="fill">
+                  <mat-label>Portability</mat-label>
+                  <mat-select formControlName="portability" required>
+                    <mat-option>Select</mat-option>
+                    <mat-option *ngFor="let portability of _portability" [value]="portability.Value">{{portability.Name}}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="policyForm.controls.portability">Please Select Portability</mat-error>
+                </mat-form-field>
+              </div>
+
+
             </div>
             <div class="row">
               <div class="col-lg-12">
