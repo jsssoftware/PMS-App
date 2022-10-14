@@ -348,6 +348,14 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   });
   //#endregion
 
+  //product  plan form 
+  productPlanForm = new FormGroup({
+    product: new FormControl(''),
+    plan: new FormControl(''),
+    planTypes: new FormControl('') 
+  }); 
+  // product plan form
+
   //#region Variables
   matcher = new ErrorStateMatcher();
   public _banks: any;
@@ -362,7 +370,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   public _numberOfYears: IYearDto[] = [];
   public _financers: any;
   public _inspectionCompanies: any;
-  public _manufacturers: any;
+  public _manufacturers: IDropDownDto<number>[] = [];;
   public _models: IDropDownDto<number>[] = [];
   public _varients: IVarientDto[] = [];
   public _makeYears: IDropDownDto<number>[] = [];
@@ -413,6 +421,15 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   public _filteredInsuranceCompaniesOptions: IDropDownDto<number>[] = [];
   public _filteredInsuranceCompaniesLastOptions: IDropDownDto<number>[] = [];
   public _filteredInsuranceCompaniesOdOptions: IDropDownDto<number>[] = [];
+
+  public _filteredPosOptions: IDropDownDto<number>[] = []; 
+  public _filteredManufacturerOptions: IDropDownDto<number>[] = [];
+
+
+  public _products: IDropDownDto<number>[] = [];
+  public _plans: IDropDownDto<number>[] = [];
+  public _planTypes: IDropDownDto<number>[] = [];
+  public _selectedProductId:number= 0;
   
   //#endregion
 
@@ -458,6 +475,9 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     this.getCommissionPaidOn();
     this.getNcbs();
     this.getVerticalDetail();
+    this.getProduct();
+    this.getPlan();
+    this.getPlanType();
 
     switch (this._policyTypeId) {
       case "1":
@@ -506,6 +526,26 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
         this.filterInsurancerCompaniesOdData(input);
       else
         this.filterInsurancerCompaniesOdData(input.Name);
+    });
+
+    this.policySourceForm.get("posName")?.valueChanges.subscribe(input => {
+      if (input == null || input === undefined || input === '')
+        return;
+
+      if (typeof (input) == "string")
+        this.filterPosdData(input);
+      else
+        this.filterPosdData(input.Name);
+    });
+
+    this.vehicleForm.get("manufacturer")?.valueChanges.subscribe(input => {
+      if (input == null || input === undefined || input === '')
+        return;
+
+      if (typeof (input) == "string")
+        this.filterdManufacturerData(input);
+      else
+        this.filterdManufacturerData(input.Name);
     });
 
   }
@@ -708,7 +748,9 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     });
   }
 
-  getModels(manufacturerId: number): any {
+  getModels(): any {
+    let manufacturerId = this.vehicleForm.value.manufacturer;
+    console.log(manufacturerId,"manufacturerId");
     this.commonService.getModels(manufacturerId).subscribe((response: IDropDownDto<number>[]) => {
       this._models = response;
     });
@@ -2428,6 +2470,14 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     return value ? this._odInsuranceCompanies.filter(f => f.Value == value)[0].Name : '';
   }
 
+  getManufacturerForBind(value: number): string { 
+    return value ? this._manufacturers.filter(f => f.Value == value)[0].Name : '';
+  }
+
+  getPosForBind(value: number): string { 
+    return value ? this._posDatas.filter(f => f.Value == value)[0].Name : '';
+  }
+
 
   filterInsurancerCompaniesData(input: any) {
     if (input === undefined)
@@ -2450,6 +2500,41 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       return;
     this._filteredInsuranceCompaniesOdOptions = this._odInsuranceCompanies.filter(item => {
       return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+
+  filterPosdData(input: any) {
+    if (input === undefined)
+      return;
+    this._filteredPosOptions = this._posDatas.filter(item => {
+      return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+
+  filterdManufacturerData(input: any) {
+    if (input === undefined)
+      return;
+    this._filteredManufacturerOptions = this._manufacturers.filter(item => {
+      return item.Name.toLowerCase().indexOf(input.toLowerCase()) > -1
+    });
+  }
+
+  getProduct(){
+    this.commonService.getProduct().subscribe((response: any) => {
+      this._products = response;
+    });
+  }
+
+  getPlan(){
+    this._selectedProductId = this.productPlanForm.value.product;
+    this.commonService.getPlan(this._selectedProductId).subscribe((response: any) => {
+      this._plans = response;
+    });
+  }
+
+  getPlanType(){
+    this.commonService.getPlanType().subscribe((response: any) => {
+      this._planTypes = response;
     });
   }
  

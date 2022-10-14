@@ -441,7 +441,7 @@
   
                     <mat-error *ngIf="policyForm.controls.lastYearInsuranceCompany">Please choose OD Insurance Company</mat-error>  
                   </mat-form-field>  
-                  
+
                 </div>
               </div>
               <div class="row">
@@ -618,6 +618,54 @@
           </form>
         </mat-expansion-panel>
         <!--End Policy Details-->
+
+        <div *ngIf="MenuVertical!='Motor'">
+          <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Product & Plan Type
+              </mat-panel-title>
+            </mat-expansion-panel-header>
+            <form [formGroup]="productPlanForm">
+              <hr style="margin-top: 0px;" />
+              <div class="row"> 
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Product</mat-label>
+                    <mat-select formControlName="product" (selectionChange)="getPlan()">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let products of _products" [value]="products.Value">
+                        {{products.Name}}</mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Plan</mat-label>
+                    <mat-select formControlName="plan" >
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let plans of _plans" [value]="plans.Value">
+                        {{plans.Name}}</mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+                </div>
+
+                <div class="col-lg-4">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Plan Type</mat-label>
+                    <mat-select formControlName="planTypes">
+                      <mat-option>Select</mat-option>
+                      <mat-option *ngFor="let planTypes of _planTypes" [value]="planTypes.Value">
+                        {{planTypes.Name}}</mat-option>
+                    </mat-select> 
+                  </mat-form-field>
+                </div>
+
+              </div>
+            </form>
+          </mat-expansion-panel>
+        </div>
   
         <!--Start Vehicle Details-->
         <div *ngIf="MenuVertical=='Motor'">
@@ -649,15 +697,28 @@
               </div>
               <div class="row">
                 <div class="col-lg-4">
-                  <mat-form-field appearance="fill">
+
+                  <mat-form-field  appearance="fill">
                     <mat-label>Manufacturer</mat-label>
-                    <mat-select formControlName="manufacturer" required (selectionChange)="getModels($event.value)">
-                      <mat-option>Select</mat-option>
-                      <mat-option *ngFor="let manufacturer of _manufacturers" [value]="manufacturer.Value">
-                        {{manufacturer.Name}}</mat-option>
-                    </mat-select>
+                    <input type="text" 
+                          placeholder="Manufacturer" 
+                          aria-label="Manufacturer" 
+                          matInput  
+                          required
+                          formControlName="manufacturer" 
+                          [matAutocomplete]="autoManufacturer" >
+                    <mat-autocomplete 
+                         autoActiveFirstOption 
+                         #autoManufacturer="matAutocomplete"
+                        [displayWith]="getManufacturerForBind.bind(this)"  (optionSelected)="getModels()">
+                      <mat-option *ngFor="let manufacturer of _filteredManufacturerOptions"
+                                  [value]="manufacturer.Value">
+                              {{manufacturer.Name}}
+                      </mat-option>
+                    </mat-autocomplete> 
                     <mat-error *ngIf="vehicleForm.controls.manufacturer">Please Select Manufacturer</mat-error>
-                  </mat-form-field>
+                  </mat-form-field> 
+ 
                 </div>
                 <div class="col-lg-4">
                   <mat-form-field appearance="fill">
@@ -1249,13 +1310,26 @@
             </div>
             <div class="row">
               <div class="col-lg-6">
-                <mat-form-field appearance="fill">
+
+                <mat-form-field  appearance="fill">
                   <mat-label>POS Name</mat-label>
-                  <mat-select formControlName="posName" (selectionChange)="businessDoneBy()">
-                    <mat-option value="0">Select</mat-option>
-                    <mat-option *ngFor="let posData of _posDatas" [value]="posData.Value">{{posData.Name}}</mat-option>
-                  </mat-select>
-                </mat-form-field>
+                  <input type="text" 
+                        placeholder="POS Name" 
+                        aria-label="POS Name" 
+                        matInput  
+                        formControlName="posName" 
+                        [matAutocomplete]="autoPos" >
+                  <mat-autocomplete 
+                       autoActiveFirstOption 
+                       #autoPos="matAutocomplete"
+                      [displayWith]="getPosForBind.bind(this)" (optionSelected)="businessDoneBy()">
+                    <mat-option *ngFor="let posData of _filteredPosOptions"
+                                [value]="posData.Value">
+                            {{posData.Name}}
+                    </mat-option>
+                  </mat-autocomplete> 
+                </mat-form-field>  
+
               </div>
               <div class="col-lg-6">
                 <div class="row">

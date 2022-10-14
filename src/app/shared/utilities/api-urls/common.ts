@@ -54,5 +54,8 @@ export class Common {
     public static readonly VoucherById = "api/common/vouchers";
     public static readonly InspectionById = "api/common/inspections";
     public static readonly Menus = "api/common/menus";
-
+    public static readonly Product = "api/common/products";
+    public static readonly Plan = "api/common/plans";
+    public static readonly PlanType = "api/common/planTypes";
+ 
 }

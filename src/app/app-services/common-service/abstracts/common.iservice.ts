@@ -76,5 +76,7 @@ export abstract class ICommonService {
     abstract getInspectionById(inspectionId: number): Observable<IPolicyInspectionDto>;
     abstract getPolicyDocumentsByPolicyId(policyId:number):Observable<IPolicyDocumentDto[]>;
     abstract getMenus():Observable<IMenuItemDto[]>;
-
+    abstract getProduct(): Observable<any>;
+    abstract getPlan(productId: number): Observable<any>;
+    abstract getPlanType(): Observable<any>;
 }
