@@ -4,4 +4,5 @@ export interface IAddOnPlanOptionDto {
     AddonPlanOptionDescripation: string;
     IsPlanAvailable: boolean;
     IsDisabled:boolean;
+    AddonValue:string;
 }

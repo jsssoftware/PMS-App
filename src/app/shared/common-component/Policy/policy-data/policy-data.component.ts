@@ -214,7 +214,10 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     // inspectionDate: new FormControl(''),
     // inspectionTime: new FormControl(''),
     // inspectionRemarks: new FormControl('')
-    portability: new FormControl('', [Validators.required])
+    portability: new FormControl('', [Validators.required]),
+    continutyStartDate : new FormControl(''),
+    previousPolicyPlan : new FormControl(''),
+    previousPolicySumInsured: new FormControl('', [Validators.pattern('^[0-9]+$')]),
   });
   //#endregion
 
@@ -816,7 +819,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   }
 
   getAddOnPlanOptions(addOnRiderId: number): void {
-    this.commonService.getAddOnPlanOptions(addOnRiderId, Vertical.Motor).subscribe((response: IAddOnPlanOptionDto[]) => {
+    this.commonService.getAddOnPlanOptions(addOnRiderId, Vertical.Motor,this._policyId).subscribe((response: IAddOnPlanOptionDto[]) => {
       response.forEach((value, index) => {
         value.IsDisabled = value.IsPlanAvailable;
         if (value.IsPlanAvailable) {
@@ -894,7 +897,8 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       tpNumberOfYear: tpYear.Value,
       odNumberOfYear: odYear.Value,
       tpStartDate: moment(new Date(2021, 3, 1)),
-      odStartDate: moment(new Date(2021, 3, 1))
+      odStartDate: moment(new Date(2021, 3, 1)),
+      continutyStartDate : moment(new Date(2021, 3, 1))
     });
 
     if (policyTerm.OdYear > 0) {

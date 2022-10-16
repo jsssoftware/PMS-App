@@ -76,8 +76,8 @@ export class CommonService extends ICommonService {
     getAddOnRiders = (insuranceCompanyId: number, verticalId: number): Observable<IDropDownDto<number>[]> =>
         this.apiManagerService.getRequest<IDropDownDto<number>[]>(`${Common.AddOnRiders}?insuranceCompanyId=${insuranceCompanyId}&verticalId=${verticalId}`);
 
-    getAddOnPlanOptions = (addOnRiderId: number, verticalId: number): Observable<IAddOnPlanOptionDto[]> =>
-        this.apiManagerService.getRequest<IAddOnPlanOptionDto[]>(`${Common.AddOnPlanOptions}?addOnRiderId=${addOnRiderId}&verticalId=${verticalId}`);
+    getAddOnPlanOptions = (addOnRiderId: number, verticalId: number,policyId: number): Observable<IAddOnPlanOptionDto[]> =>
+        this.apiManagerService.getRequest<IAddOnPlanOptionDto[]>(`${Common.AddOnPlanOptions}?addOnRiderId=${addOnRiderId}&verticalId=${verticalId}&policyId=${policyId}`);
 
     getRelations = (): Observable<any> => this.apiManagerService.getRequest(Common.Relations);
 

@@ -41,7 +41,7 @@ export abstract class ICommonService {
     abstract getNcbs(): Observable<any>;
     abstract getCommissionPaidOn(): Observable<any>;
     abstract getAddOnRiders(insuranceCompanyId: number, verticalId: number): Observable<IDropDownDto<number>[]>;
-    abstract getAddOnPlanOptions(addOnRiderId: number, verticalId: number): Observable<IAddOnPlanOptionDto[]>;
+    abstract getAddOnPlanOptions(addOnRiderId: number, verticalId: number,policyId:number): Observable<IAddOnPlanOptionDto[]>;
     abstract getRelations(): Observable<any>;
     abstract getTeleCallers(vertical: Vertical, branchId: number): Observable<any>;
     abstract getReferences(branchId: number): Observable<any>;
