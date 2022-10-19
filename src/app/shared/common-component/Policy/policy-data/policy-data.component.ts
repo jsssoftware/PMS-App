@@ -271,7 +271,9 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     loading: new FormControl(''),
     ncb: new FormControl('', [Validators.required]),
     commissionPaidOn: new FormControl(''),
-    commissionablePremium: new FormControl('')
+    commissionablePremium: new FormControl(''),
+    basicTPgstPercent: new FormControl(18, [Validators.required]),
+    netpremium : new FormControl(''),
   });
   //#endregion
 
@@ -1692,6 +1694,7 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
 
     this.calculateGrossPremium();
     this.calculateCommissionablePremium(this._commissionPaidOnId);
+    this.calculateNetPremium();
   }
 
   calculateTotalTp() {
@@ -1732,14 +1735,21 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     let nonCommissionComponentPremium: any = this.premiumForm.controls.nonCommissionComponentPremium.value;
     let gstValue: any = this.premiumForm.controls.gstValue.value;
     let gst: any = this.premiumForm.controls.gst.value;
+    let basicTPgstPercent: any = this.premiumForm.controls.basicTPgstPercent.value;
+
 
     let sum = parseInt(od == "" ? 0 : od) + parseInt(addOnRiderOd == "" ? 0 : addOnRiderOd)
       + parseInt(tp == "" ? 0 : tp) + parseInt(passengerCover == "" ? 0 : passengerCover)
       + parseInt(nonCommissionComponentPremium == "" ? 0 : nonCommissionComponentPremium);
 
+    let sum2 =    parseInt(tp == "" ? 0 : tp) 
+    let sum2gst = (basicTPgstPercent / 100) * sum2;
     gstValue = (gst / 100) * sum;
-    this.premiumForm.patchValue({ gstValue: gstValue });
-    sum += parseInt(gstValue == "" ? 0 : gstValue);
+    let gstFinalValue = gstValue + sum2gst
+    this.premiumForm.patchValue({ gstValue: gstFinalValue });
+
+
+    sum += parseInt(gstFinalValue == "" ? 0 : gstFinalValue);
     this.premiumForm.patchValue({ grossPremium: sum.toFixed(2) });
 
     this.calculateTotalGrossPremium();
@@ -2549,6 +2559,16 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       this._portability = response;
     });
   }
- 
+
+  calculateChanges()
+  {
+
+  }
+
+  calculateNetPremium(){ 
+    let sm= this.premiumForm.controls.nonCommissionComponentPremium.value +  this.premiumForm.controls.totalTp.value  +  this.premiumForm.controls.totalOd.value;
+    this.premiumForm.patchValue({ netpremium: sm });
+   
+  }
 }
 
