@@ -966,6 +966,12 @@ Table
     width: 100%;
     text-align: left;
 }
+
+th.mat-header-cell{
+    white-space: nowrap;
+    font-weight: bolder !important;
+    font-size: 15px !important;
+}
 .table-rasponsive{
     overflow:auto;
     .mat-table{
@@ -974,6 +980,8 @@ Table
     .mat-header-row{
         .mat-header-cell{
             white-space: nowrap;
+            font-weight: bolder !important;
+            font-size: 15px !important;
         }
     }
     .mat-cell{

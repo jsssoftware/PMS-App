@@ -2,7 +2,7 @@
     <mat-card-header>
       <div mat-card-avatar class="header-image"
         style="background-image: url('../../../../assets/images/motor.png');"></div> <!-- to do dynamic -->
-       <mat-card-title>{{MenuVertical}} Policy</mat-card-title>  <!-- to do dynamic -->
+       <mat-card-title >{{MenuVertical}} Policy</mat-card-title>  <!-- to do dynamic -->
       <mat-card-subtitle>Insurance</mat-card-subtitle>
     </mat-card-header>
     <hr class="hrClass" />
@@ -1228,13 +1228,9 @@
             </div>
             <div class="row" [ngStyle]="{'margin-top':'12px'}">
               <div class="col-lg-3" *ngFor="let option of _addOnPlanOptions; let i = index;">
-
-                 
                   <input type="text" matInput name="txtAddOn{{i}}" placeholder="AddonValue" [(ngModel)]="option.AddonValue" style="width: 40%;
                   float: left;
-                  line-height: 25px;"/>
-                
-
+                  line-height: 25px; border-bottom: 1px solid;  margin-right: 10px;"/> 
                 <mat-checkbox color="primary" [(ngModel)]="option.IsPlanAvailable" name="{{i}}"
                   (change)="getCheckboxValue(i, option.IsPlanAvailable, option.AddonPlanOptionName)"
                   [disabled]="option.IsDisabled">

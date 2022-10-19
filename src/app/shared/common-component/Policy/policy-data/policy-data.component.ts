@@ -482,7 +482,6 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
     this.getNcbs();
     this.getVerticalDetail();
     this.getProduct();
-    this.getPlan();
     this.getPlanType();
     this.getPortability();
     switch (this._policyTypeId) {

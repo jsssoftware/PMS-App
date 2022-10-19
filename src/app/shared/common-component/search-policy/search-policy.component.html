@@ -1,5 +1,5 @@
 <mat-card class="mat-elevation-z2">
-  <mat-card-header  class="card-container" style="display: flow-root">
+  <mat-card-header  class="card-container" style="display: flow-root"> 
     <mat-card-title style="width: 50%; float: left;">
       <p>Search Policy :  {{_headerTitle}}</p> 
     </mat-card-title>
@@ -248,7 +248,7 @@
           </button>
         </div>  
 
-        <div [ngClass]="_showAll ? 'col-sm-3' : 'col-sm-4'"></div>
+        <div [ngClass]="_showAll ? 'col-sm-4' : 'col-sm-5'"></div>
 
         <div class="col-sm-1">
           <button type="reset" class="btn-block" mat-raised-button color="accent" (click)="reset()">
@@ -264,7 +264,7 @@
           </button> 
         </div>
  
-        <div class="col-sm-5"></div>
+        <div [ngClass]="_showAll ? 'col-sm-4' : 'col-sm-5'"></div>
 
         <div class="col-sm-1" style="padding:0;">
           <div *ngIf="_length > 0 && _policyTypeId!=6 && _policyTypeId!=7 ">
