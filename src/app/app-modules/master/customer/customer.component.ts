@@ -69,6 +69,10 @@ export class CustomerComponent implements OnInit {
 
 
   routeToMotorPolicy(customerId: number) {
-    this.router.navigate(["/pms/motor", { customerId, policyTypeId: this._policyTypeId }]);
+    let VType  = this.route.snapshot.paramMap.get('verticalType');
+    if(VType=='1')
+      this.router.navigate(["/pms/motor", { customerId, policyTypeId: this._policyTypeId }]);
+    if(VType=='2')
+      this.router.navigate(["/pms/health", { customerId, policyTypeId: this._policyTypeId }]);
   }
 }

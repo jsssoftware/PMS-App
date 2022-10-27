@@ -1067,9 +1067,9 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
   }
 
   createPolicy(): any {
-
+     
     let model: IMotorPolicyFormDataModel = {
-      BranchId: this._branchId,
+      BranchId: this._branchId, 
       VerticalCode: this._verticalDetail.VerticalCode,
       CoverNoteIssueDateString: this.commonService.getDateInString(this.PolicyForm.coverNoteIssueDate),
       CoverNoteIssueDateDto: null,
@@ -1147,11 +1147,11 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
         AcknowledgementSlipIssueDateString: this.commonService.getDateInString(this.PolicyTermForm.acknowledgementSlipIssueDate),
         AcknowledgementSlipIssueDateDto: null,
         AcknowledgementSlipNumber: this.PolicyTermForm.acknowledgementSlipNumber,
-        PackageTypeId: this.PolicyTermForm.packageType,
-        PolicyTerm: this.PolicyTermForm.policyTerm.Id,
+        PackageTypeId:  (this.MenuVertical=='Motor')? this.PolicyTermForm.packageType.Id:0,  
+        PolicyTerm: (this.MenuVertical=='Motor')? this.PolicyTermForm.policyTerm.Id:0,
         PolicyType: this.PolicyTermForm.policyType,
         VehicleClass: this.PolicyTermForm.vehicleClass,
-        PackageType: this._packageTypes.filter(f => f.Value == this.PolicyTermForm.packageType)[0].Name
+        PackageType:  (this.MenuVertical=='Motor')? this._packageTypes.filter(f => f.Value == this.PolicyTermForm.packageType)[0].Name:'',
       },
       Premium: {
         AddOnRiderOd: this.PremiumForm.addOnRiderOd,
@@ -1227,26 +1227,20 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
       VerticalSegmentId: this._verticalDetail.VerticalSegmentId
     }
 
-     
-    this.motorService.createPolicy(model).subscribe((response: ICommonDto<any>) => {
+     if(this._policyId==null)
+     { 
+      console.log(model,'model')
+      this.motorService.createPolicy(model).subscribe((response: ICommonDto<any>) => {
 
-      if (response.IsSuccess) {
-        Swal.fire({
-          icon: 'success',
-          title: 'Done',
-          text: response.Message,
-        });
-      }
-      else {
-        if (response.Response == null) {
+        if (response.IsSuccess) {
           Swal.fire({
-            icon: 'error',
-            title: 'Sorry',
+            icon: 'success',
+            title: 'Done',
             text: response.Message,
           });
         }
         else {
-          if (response.Response.IsError) {
+          if (response.Response == null) {
             Swal.fire({
               icon: 'error',
               title: 'Sorry',
@@ -1254,22 +1248,63 @@ export class PolicyDataComponent implements OnInit, AfterViewInit, ErrorStateMat
             });
           }
           else {
-            Swal.fire({
-              title: 'Warning',
-              text: response.Message,
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: 'Yes, Save it!',
-              cancelButtonText: 'Cancel'
-            }).then((result) => {
-              if (result.isConfirmed) {
-                this.createPolicyAfterWarning(response);
-              }
-            })
+            if (response.Response.IsError) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Sorry',
+                text: response.Message,
+              });
+            }
+            else {
+              Swal.fire({
+                title: 'Warning',
+                text: response.Message,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, Save it!',
+                cancelButtonText: 'Cancel'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                  this.createPolicyAfterWarning(response);
+                }
+              })
+            }
           }
         }
-      }
-    });
+      });
+    }
+    else
+    {
+      this.motorService.updatePolicy(this._policyId,model).subscribe((response: ICommonDto<any>) => {
+
+        if (response.IsSuccess) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Done',
+            text: response.Message,
+          });
+        }
+        else {
+          if (response.Response == null) {
+            Swal.fire({
+              icon: 'error',
+              title: 'Sorry',
+              text: response.Message,
+            });
+          }
+          else {
+            if (response.Response.IsError) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Sorry',
+                text: response.Message,
+              });
+            } 
+          }
+        }
+      });
+
+    }
   }
 
   createPolicyAfterWarning(response: ICommonDto<any>) {

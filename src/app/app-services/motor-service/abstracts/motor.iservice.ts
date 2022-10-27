@@ -4,5 +4,6 @@ import { IMotorPolicyFormDataModel } from "src/app/app-entites/models/motor/moto
 
 export abstract class IMotorService {
      abstract createPolicy(model: any): Observable<ICommonDto<string>>;
+     abstract updatePolicy(policyId: number,model: any): Observable<ICommonDto<string>>;
      abstract getMotorPolicyById(policyId: number): Observable<IMotorPolicyFormDataModel>;
 }

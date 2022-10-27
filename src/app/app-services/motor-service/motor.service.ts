@@ -11,6 +11,7 @@ export class MotorService extends IMotorService {
     constructor(private apiManagerService: IApiManagerService) { super(); }
 
     createPolicy = (model: any): Observable<ICommonDto<string>> => this.apiManagerService.postRequest<ICommonDto<string>>(Motor.CreateMotorPolicy, model);
+    updatePolicy = (policyId:number,model: any): Observable<ICommonDto<string>> => this.apiManagerService.putRequest<ICommonDto<string>>(`${Motor.UpdateMotorPolicy}/${policyId}`, model);
     getMotorPolicyById = (policyId: number): Observable<IMotorPolicyFormDataModel> => this.apiManagerService.getRequest<IMotorPolicyFormDataModel>(`${Motor.MotorPolicyById}/${policyId}`);
 
 }
